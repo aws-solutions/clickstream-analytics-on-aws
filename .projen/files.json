@@ -2,9 +2,6 @@
   "files": [
     ".eslintrc.json",
     ".gitattributes",
-    ".github/workflows/build.yml",
-    ".github/workflows/pull-request-lint.yml",
-    ".github/workflows/upgrade.yml",
     ".gitignore",
     ".gitlab-ci.yml",
     ".gitlab/ci-templates/build.yml",

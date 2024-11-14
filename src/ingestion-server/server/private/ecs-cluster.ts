@@ -78,7 +78,7 @@ export function createECSClusterAndService(
     assumedBy: new ServicePrincipal('ec2.amazonaws.com'),
   });
 
-  const userData = UserData.forLinux();
+  const userData = UserData.forLinux();  
 
   const launchTemplate = new LaunchTemplate(scope, `${RESOURCE_ID_PREFIX}ecs-launch-template`, {
     machineImage: ecsConfig.machineImage,

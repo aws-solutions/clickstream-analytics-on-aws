@@ -15,7 +15,6 @@
 const esbuild = require('esbuild');
 const inlineImage = require('esbuild-plugin-inline-image');
 const sassPlugin = require('esbuild-plugin-sass');
-const htmlMinifier = require('html-minifier');
 const { createHash } = require('crypto');
 const fs = require('fs');
 const path = require('path');
@@ -123,14 +122,7 @@ const build = () => {
            </body>`
         );
 
-      const minifiedHtml = htmlMinifier.minify(updatedIndexHtmlContent, {
-        removeComments: true,
-        collapseWhitespace: true,
-        minifyJS: true,
-        minifyCSS: true,
-      });
-
-      fs.writeFileSync(indexHtmlPath, minifiedHtml, {
+      fs.writeFileSync(indexHtmlPath, updatedIndexHtmlContent, {
         encoding: 'utf-8',
       });
 
