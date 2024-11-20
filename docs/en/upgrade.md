@@ -56,14 +56,14 @@ You can view the status of the stack in the AWS CloudFormation console in the **
 You can view the status of the pipeline in the solution console in the **Status** column. After a few minutes, you can receive an Active status.
 
 ## Post-Upgrade Actions
-This section provides instructions for post-upgrade actions.
+
 ### Ingestion
 
-As of version 1.1.7, this solution uses [launch templates][launch templates]. After upgrading the data ingestion module, complete the following steps to replace the Amazon EC2 instances used by Amazon ECS with the new launch template configuration.
+Due to AWS no longer supporting Launch Configurations in Auto Scaling Groups, we will use Launch Template instead. After upgrading the data ingestion module to v1.2.0, please follow below steps to replace the EC2 instances used by Amazon ECS with the new Launch Template configuration:
 
-1. Increase the desired task number by [updating the Amazon ECS service][updating the Amazon ECS service].
-2. After the newly added Amazon ECS tasks have started successfully, [manually stop the old tasks][manually stop the old tasks].
-3. Manually [terminate the old Amazon EC2 instances][terminate the old Amazon EC2 instances].
+1. Manually increase the desired number of tasks in Amazon ECS.
+2. Once the newly added Amazon ECS tasks have started successfully, manually stop the old tasks.
+3. Manually terminate the old EC2 instances.
 
 ### Data Modeling
 
@@ -179,7 +179,3 @@ The solution automatically and asynchronously upgrades the views and materialize
 [exploration]: ./analytics/explore/index.md
 [view-schema-in-redshift]: ./faq.md#i-already-enable-data-modeling-on-redshift-so-why-cant-i-see-the-schema-and-tables-created-by-this-solution-in-the-redshift-query-editor
 [faq-recalculate-data]: ./faq.md#how-do-i-recalculate-historical-events-for-out-of-the-box-dashboards
-[launch templates]: https://alpha.www.docs.aws.a2z.com/autoscaling/ec2/userguide/launch-templates.html
-[updating the Amazon ECS service]: https://alpha.www.docs.aws.a2z.com/AmazonECS/latest/developerguide/update-service-console-v2.html
-[manually stop the old tasks]: https://alpha.www.docs.aws.a2z.com/AmazonECS/latest/developerguide/standalone-task-stop.html
-[terminate the old Amazon EC2 instances]: https://alpha.www.docs.aws.a2z.com/AWSEC2/latest/UserGuide/terminating-instances.html

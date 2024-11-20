@@ -32,7 +32,7 @@ const commonDeps = [
   'cron-parser@^4.8.1',
   'moment-timezone@^0.5.45',
   'node-fetch@^2.6.4',
-  'jsonpath-plus@^7.2.0',
+  'jsonpath-plus@^10.0.0',
   'csv-parser@^3.0.0',
 ];
 
@@ -120,7 +120,7 @@ const depsForFrontendProject = [
   '@pmmmwh/react-refresh-webpack-plugin@^0.5.3',
   '@svgr/webpack@^5.5.0',
   'amazon-quicksight-embedding-sdk@^2.4.0',
-  'axios@^1.4.0',
+  'axios@^1.7.4',
   'bfj@^7.0.2',
   'browserslist@^4.21.7',
   'camelcase@^6.2.1',
@@ -133,7 +133,7 @@ const depsForFrontendProject = [
   'file-loader@^6.2.0',
   'fs-extra@^10.0.0',
   'html-webpack-plugin@^5.5.0',
-  'http-proxy-middleware@^2.0.6',
+  'http-proxy-middleware@^2.0.7',
   'i18next@^22.4.6',
   'i18next-browser-languagedetector@^7.0.1',
   'i18next-http-backend@^2.1.1',
@@ -207,7 +207,6 @@ const devDepsForFrontendProject = [
   'eslint-plugin-promise@^6.1.1',
   'eslint-plugin-react@^7.31.10',
   'eslint-webpack-plugin@^3.1.1',
-  'html-minifier@^4.0.0',
   'prettier@^2.7.1',
   'typescript@^4.8.4',
   'crypto-browserify@^3.12.0',
@@ -334,18 +333,8 @@ const project = new awscdk.AwsCdkTypeScriptApp({
     },
   },
   githubOptions: {
-    pullRequestLintOptions: {
-      semanticTitleOptions: {
-        types: [
-          'feat',
-          'fix',
-          'chore',
-          'docs',
-          'ci',
-          'tests',
-        ],
-      },
-    },
+    pullRequestLint: false,
+    workflows: false,
   },
   depsUpgradeOptions: {
     workflowOptions: {
@@ -707,14 +696,6 @@ project.upgradeWorkflow.workflows[0].jobs.upgrade.steps.splice(4, 0, {
   name: 'Upgrade API dependencies',
   run: 'cd src/control-plane/backend/lambda/api/ && pnpm dlx projen upgrade && cd ../../../../../',
 });
-
-project.github.actions.set('actions/checkout', 'actions/checkout@v4');
-project.github.actions.set('actions/setup-node', 'actions/setup-node@v4');
-project.github.actions.set('actions/setup-python', 'actions/setup-python@v5');
-project.github.actions.set('actions/upload-artifact', 'actions/upload-artifact@v4');
-project.github.actions.set('actions/download-artifact', 'actions/download-artifact@v4');
-project.github.actions.set('amannn/action-semantic-pull-request', 'amannn/action-semantic-pull-request@v5');
-project.github.actions.set('peter-evans/create-pull-request', 'peter-evans/create-pull-request@v6');
 
 const provisionViperlightScripts = [
   'curl -sL https://deb.nodesource.com/setup_16.x | bash -',
