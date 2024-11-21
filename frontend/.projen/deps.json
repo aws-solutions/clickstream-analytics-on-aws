@@ -170,11 +170,6 @@
       "type": "build"
     },
     {
-      "name": "html-minifier",
-      "version": "^4.0.0",
-      "type": "build"
-    },
-    {
       "name": "https-browserify",
       "version": "^1.0.0",
       "type": "build"
@@ -322,7 +317,7 @@
     },
     {
       "name": "axios",
-      "version": "^1.4.0",
+      "version": "^1.7.4",
       "type": "runtime"
     },
     {
@@ -387,7 +382,7 @@
     },
     {
       "name": "http-proxy-middleware",
-      "version": "^2.0.6",
+      "version": "^2.0.7",
       "type": "runtime"
     },
     {
