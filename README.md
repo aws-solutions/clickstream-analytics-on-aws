@@ -1,133 +1,334 @@
-# Clickstream Analytics on AWS
+# AWS Solution Clickstream Analytics SDK for Swift
 
-An end-to-end solution to collect, ingest, analyze, and visualize clickstream data inside your web and mobile applications.
+## Introduction
 
-## Solution Overview
+Clickstream Swift SDK can help you easily collect and report in-app events from iOS devices to AWS. This SDK is part of an AWS solution - [Clickstream Analytics on AWS](https://github.com/awslabs/clickstream-analytics-on-aws), which provisions data pipeline to ingest and process event data into AWS services such as S3, Redshift.
 
-This solution collects, ingests, analyzes, and visualizes clickstream events from your websites and mobile applications. Clickstream data is critical for online business analytics use cases, such as user behavior analysis, customer data platform, and marketing analysis. This data derives insights into the patterns of user interactions on a website or application, helping businesses understand user navigation, preferences, and engagement levels to drive product innovation and optimize marketing investments.
+The SDK relies on the Amplify for Swift Core Library and is developed according to the Amplify Swift SDK plug-in specification. In addition, we've added features that automatically collect common user events and attributes (e.g., screen view, first open) to simplify data collection for users.
 
-With this solution, you can quickly configure and deploy a data pipeline that fits your business and technical needs. It provides purpose-built software development kits (SDKs) that automatically collect common events and easy-to-use APIs to report custom events, enabling you to easily send your customers’ clickstream data to the data pipeline in your AWS account. The solution also offers pre-assembled dashboards that visualize key metrics about user lifecycle, including acquisition, engagement, activity, and retention, and adds visibility into user devices and geographies. You can combine user behavior data with business backend data to create a comprehensive data platform and generate insights that drive business growth.
+Visit our [Documentation site](https://awslabs.github.io/clickstream-analytics-on-aws/en/latest/sdk-manual/swift/) and to learn more about Clickstream Swift SDK.
 
-## Architecture Overview
+### Platform Support
+    
+The Clickstream SDK supports iOS 13+.
 
-![architecture diagram](./docs/images/architecture/01-architecture-end-to-end.png)
+[**API Documentation**](https://awslabs.github.io/clickstream-swift/) 
 
-1. Amazon CloudFront distributes the frontend web UI assets hosted in the Amazon S3 bucket, and the backend APIs hosted with Amazon API Gateway and AWS Lambda.
-2. The Amazon Cognito user pool or OpenID Connect (OIDC) is used for authentication.
-3. The web UI console uses Amazon DynamoDB to store persistent data.
-4. AWS Step Functions, AWS CloudFormation, AWS Lambda, and Amazon EventBridge are used for orchestrating the lifecycle management of data pipelines.
-5. The data pipeline is provisioned in the Region specified by the system operator. It consists of Application Load Balancer (ALB),
-Amazon ECS, Amazon Managed Streaming for Kafka (Amazon MSK), Amazon Kinesis Data Streams, Amazon S3, Amazon EMR Serverless, Amazon Redshift, and Amazon QuickSight.
+- [Objective-C API Reference](https://awslabs.github.io/clickstream-swift/Classes/ClickstreamObjc.html)
 
-For more information, refer to [the doc][doc-arch].
+## Integrate SDK
 
-## SDKs
+Clickstream requires Xcode 13.4 or higher to build.
 
-Clickstream Analytics on AWS provides different client-side SDKs, which can make it easier for you to report events to the data pipeline created in the solution. Currently, the solution supports the following platforms:
+### 1.Add Package
 
-- [Android][android-sdk]
-- [Swift][swift-sdk]
-- [Web][web-sdk]
-- [Flutter][flutter-sdk]
-- [React Native][react-native-sdk]
-- [WeChat Mini Program][wechat-sdk]
-- [HTTP API][http-api]
+We use **Swift Package Manager** to distribute Clickstream Swift SDK, open your project in Xcode and select **File > Add Packages**.
 
-See [this repo][sdk-samples] for different kinds of SDK samples.
+![](images/add_package.png)
 
-## Deployment
+Enter the Clickstream Library for Swift GitHub repo URL (`https://github.com/awslabs/clickstream-swift`) into the search bar, you'll see the Clickstream Library for Swift repository rules for which version of Clickstream you want Swift Package Manager to install. Choose **Up to Next Major Version**, then click **Add Package**, make the Clickstream product checked as default, and click **Add Package** again.
 
-### Using AWS CloudFormation template
+![](images/add_package_url.png)
 
-Follow the [implementation guide][doc-deployment] to deploy the solution using AWS CloudFormation template.
+### 2.Parameter configuration
 
-### Using AWS CDK
+Downlod your `amplifyconfiguration.json` file from your Clickstream solution control plane, and paste it to your project root folder:
 
-#### Preparations
+![](images/add_amplify_config_json_file.png)
 
-- Make sure you have an AWS account
-- Configure [credential of aws cli][configure-aws-cli]
-- Install Node.js LTS version 20.12.0 or later
-- Install Docker Engine
-- Install pnpm `npm install -g pnpm@8.15.3`
-- Install the dependencies of the solution by executing the command `pnpm install && pnpm projen && pnpm nx build @aws/clickstream-base-lib`
-- Initialize the CDK toolkit stack into AWS environment (only for deploying via [AWS CDK][aws-cdk] for the first time), and run `npx cdk bootstrap`
+the json file will be as follows:
 
-#### Deploy the web console
-
-```shell
-# deploy the web console of the solution
-npx cdk deploy cloudfront-s3-control-plane-stack-global --parameters Email=<your email> --require-approval never
+```json
+{
+  "analytics": {
+    "plugins": {
+      "awsClickstreamPlugin ": {
+        "appId": "appId",
+        "endpoint": "https://example.com/collect",
+        "isCompressEvents": true,
+        "autoFlushEventsInterval": 10000,
+        "isTrackAppExceptionEvents": false
+      }
+    }
+  }
+}
 ```
 
-#### Deploy pipeline stacks
+Your `appId` and `endpoint` are already set up in it, here's an explanation of each property:
 
-```shell
-# deploy the ingestion server with s3 sink
-# 1. check stack name in src/main.ts for other stacks
-# 2. check the stack for required CloudFormation parameters
-npx cdk deploy ingestion-server-s3-stack --parameters ...
+- **appId**: the app id of your project in control plane.
+- **endpoint**: the endpoint url you will upload the event to AWS server.
+- **isCompressEvents**: whether to compress event content when uploading events, default is `true`
+- **autoFlushEventsInterval**: event sending interval, the default is `10s`
+- **isTrackAppExceptionEvents**: whether auto track exception event in app, default is `false`
+
+### 3.Initialize the SDK
+
+Once you have configured the parameters, you need to initialize it in your app delegate's `application(_:didFinishLaunchingWithOptions:)` lifecycle method:
+
+#### 3.1 Initialize the SDK with default configuration
+```swift
+import Clickstream
+...
+func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    do {
+        try ClickstreamAnalytics.initSDK()
+    } catch {
+        assertionFailure("Fail to initialize ClickstreamAnalytics: \(error)")
+    }
+    return true
+}
 ```
 
-#### Deploy local code for updating existing stacks created by the web console
+#### 3.2 Initialize the SDK with global attributes and custom configuration
 
-```shell
-# update the existing data modeling Redshift stack Clickstream-DataModelingRedshift-xxx
-bash e2e-deploy.sh -n modelRedshiftStackName -s Clickstream-DataModelingRedshift-xxx
-# update the existing web console
-bash e2e-deploy.sh -n standardControlPlaneStackName -s <stack name of existing web console> -c
+The following example code shows how to add traffic source fields as global attributes when initializing the SDK.
+
+```swift
+import Clickstream
+...
+func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    do {
+        let configuration = ClickstreamConfiguration()
+            .withAppId("your appId")
+            .withEndpoint("https://example.com/collect")
+            .withLogEvents(true)
+            .withInitialGlobalAttributes([
+                ClickstreamAnalytics.Attr.TRAFFIC_SOURCE_SOURCE: "amazon",
+                ClickstreamAnalytics.Attr.TRAFFIC_SOURCE_MEDIUM: "cpc",
+                ClickstreamAnalytics.Attr.TRAFFIC_SOURCE_CAMPAIGN: "summer_promotion",
+                ClickstreamAnalytics.Attr.TRAFFIC_SOURCE_CAMPAIGN_ID: "summer_promotion_01",
+                ClickstreamAnalytics.Attr.TRAFFIC_SOURCE_TERM: "running_shoes",
+                ClickstreamAnalytics.Attr.TRAFFIC_SOURCE_CONTENT: "banner_ad_1",
+                ClickstreamAnalytics.Attr.TRAFFIC_SOURCE_CLID: "amazon_ad_123",
+                ClickstreamAnalytics.Attr.TRAFFIC_SOURCE_CLID_PLATFORM: "amazon_ads",
+                ClickstreamAnalytics.Attr.APP_INSTALL_CHANNEL: "App Store"
+            ])
+        try ClickstreamAnalytics.initSDK(configuration)
+    } catch {
+        assertionFailure("Fail to initialize ClickstreamAnalytics: \(error)")
+    }
+    return true
+}
 ```
 
-## Test
+By default, we will use the configurations in `amplifyconfiguration.json` file. If you add a custom configuration, the added configuration items will override the default values. 
 
-```shell
-pnpm test
+You can also add all the configuration parameters you need in the `initSDK` method without using the `amplifyconfiguration.json` file.
+
+#### 3.3 SwiftUI configuration
+If your project is developed with SwiftUI, you need to create an application delegate and attach it to your `App` through `UIApplicationDelegateAdaptor`. 
+
+```swift
+@main
+struct YourApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    var body: some Scene {
+        WindowGroup {
+            YourView()
+        }
+    }
+}
 ```
 
-## Local development for web console
+Clickstream Swift SDK depends on method swizzling to automatically record screen views. SwiftUI apps must [record screen view events manually](#record-screen-view-events-manually), and disable automatic tracking of screen view events by setting `configuration.withTrackScreenViewEvents(false)` when the SDK is initialized.
 
-- Step1: Deploy the solution control plane(create DynamoDB tables, State Machine and other resources). 
-- Step2: Open **Amazon Cognito** console, select the corresponding **User pool**, click the **App integration** tab, select application details in the **App client list**, edit **Hosted UI**, and set a new URL: `http://localhost:3000/signin` into **Allowed callback URLs**.
-- Step3: Goto the folder: `src/control-plane/local`
+### 4. Update Configuration
 
-```shell
-cd src/control-plane/local
+```swift
+import Clickstream
+
+// configure the sdk after initialize.
+do {
+    let configuration = try ClickstreamAnalytics.getClickstreamConfiguration()
+    configuration.withAppId("your appId")
+        .withEndpoint("https://example.com/collect")
+        .withLogEvents(true)
+        .withCompressEvents(true)
+        .withSessionTimeoutDuration(1800000)
+        .withTrackAppExceptionEvents(true)
+        .withTrackScreenViewEvents(true)
+        .withTrackUserEngagementEvents(true)
+} catch {
+    print("Failed to config ClickstreamAnalytics: \(error)")
+}
 ```
 
-```shell
-# run backend server local
-bash start.sh -s backend
+> note: this configuation will override the default configuation in `amplifyconfiguration.json` file
+
+### Start using
+
+#### Recored event.
+
+Add the following code where you need to complete the event report.
+
+```swift
+import Clickstream
+
+let attributes: ClickstreamAttribute = [
+    "Channel": "apple",
+    "Successful": true,
+    "ProcessDuration": 12.33,
+    "UserAge": 20,
+]
+ClickstreamAnalytics.recordEvent("testEvent", attributes)
+
+// for record an event with event name
+ClickstreamAnalytics.recordEvent("button_click")
 ```
 
-```shell
-# run frontend server local
-bash start.sh -s frontend
+#### Record event with items
+
+You can add the following code to log an event with an item.
+
+**Note: Only pipelines from version 1.1+ can handle items with custom attribute.**
+
+```swift
+import Clickstream
+
+let attributes: ClickstreamAttribute = [
+    ClickstreamAnalytics.Item.ITEM_ID: "123",
+    ClickstreamAnalytics.Item.CURRENCY: "USD",
+    "event_category": "recommended"
+]
+
+let item_book: ClickstreamAttribute = [
+    ClickstreamAnalytics.Item.ITEM_ID: 123,
+    ClickstreamAnalytics.Item.ITEM_NAME: "Nature",
+    ClickstreamAnalytics.Item.ITEM_CATEGORY: "book",
+    ClickstreamAnalytics.Item.PRICE: 99.9,
+    "book_publisher": "Nature Research"
+]
+ClickstreamAnalytics.recordEvent("view_item", attributes, [item_book])
 ```
 
-## Local build spark ETL jar
+#### Record Screen View events manually
 
-- Step1: Build ETL common
+By default, SDK will automatically track the preset `_screen_view` event when ViewController triggers `viewDidAppear`.
 
-```shell
-cd src/data-pipeline/etl-common 
-./gradlew clean build install
+You can also manually record screen view events whether or not automatic screen view tracking is enabled, add the following code to record a screen view event with two attributes.
 
+* `SCREEN_NAME` Required. Your screen's name.
+* `SCREEN_UNIQUE_ID` Optional. Set the hashValue of your ViewController or UIView. If you do not set, SDK will set a default value based on the current ViewController's hashValue.
+
+```swift
+import Clickstream
+
+ClickstreamAnalytics.recordEvent(ClickstreamAnalytics.EventName.SCREEN_VIEW, [
+    ClickstreamAnalytics.Attr.SCREEN_NAME: "HomeView",
+    ClickstreamAnalytics.Attr.SCREEN_UNIQUE_ID: homeView.hashValue
+])
 ```
 
-- Step2: Build spark ETL jar
+#### Add global attribute
 
-```shell
-cd src/data-pipeline/spark-etl
+```swift
+import Clickstream
 
-# build with unit tests
-./gradlew clean build 
+let globalAttribute: ClickstreamAttribute = [
+    ClickstreamAnalytics.Attr.APP_INSTALL_CHANNEL: "apple",
+    "class": 6,
+    "level": 5.1,
+    "isOpenNotification": true,
+]
+ClickstreamAnalytics.addGlobalAttributes(globalAttribute)
 
-# or only build jar and skip all unit tests 
-./gradlew clean build -x test -x :coverageCheck
+// for delete an global attribute
+ClickstreamAnalytics.deleteGlobalAttributes("level")
+```
 
-# check the jar file
-ls -l ./build/libs/spark-etl-*.jar
+#### Login and logout
 
+```swift
+import Clickstream
+
+// when user login usccess.
+ClickstreamAnalytics.setUserId("userId")
+
+// when user logout
+ClickstreamAnalytics.setUserId(nil)
+```
+
+When we log into another user, we will clear the before user's user attributes, after `setUserId()` you need to add new user's attribute.
+
+#### Add user attribute
+
+```swift
+import Clickstream
+
+let userAttributes : ClickstreamAttribute=[
+    "_user_age": 21,
+    "_user_name": "carl"
+]
+ClickstreamAnalytics.addUserAttributes(userAttributes)
+```
+
+Current login user‘s attributes will be cached in disk, so the next time app launch you don't need to set all user's attribute again, of course you can update the current user's attribute when it changes.
+
+#### Log the event json in debug mode
+
+```swift
+import Clickstream
+
+// log the event in debug mode.
+do {
+    var configuration = try ClickstreamAnalytics.getClickstreamConfiguration()
+    configuration.isLogEvents = true
+} catch {
+    print("Failed to config ClickstreamAnalytics: \(error)")
+}
+```
+
+After config `configuration.isLogEvents = true` and when you record an event, you can see the event json at your Xcode log pannel by filter `EventRecorder`.
+
+#### Send event immediately
+
+```swift
+import Clickstream
+// for send event immediately.
+ClickstreamAnalytics.flushEvents()
+```
+
+#### Disable SDK
+
+You can disable the SDK in the scenario you need. After disabling the SDK, the SDK will not handle the logging and sending of any events. Of course you can enable the SDK when you need to continue logging events.
+
+```swift
+import Clickstream
+
+// disable SDK
+ClickstreamAnalytics.disable()
+
+// enable SDK
+ClickstreamAnalytics.enable()
+```
+
+## How to build & test locally
+
+### Config your code format
+
+Install [swiftformat plugin](https://github.com/nicklockwood/SwiftFormat#xcode-source-editor-extension) in your Xcode, and config shortcut for code format.
+
+### Config your code lint
+
+Install [swiftlint](https://github.com/realm/SwiftLint), and execute the below command at the project root folder:
+
+```bash
+swiftlint
+```
+
+### Build
+
+Open an termial window, at the root project folder to execute: 
+
+```bash
+swift build
+```
+
+### Test
+
+```bash
+swift test
 ```
 
 ## Security
@@ -136,102 +337,8 @@ See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more inform
 
 ## License
 
-This project is licensed under the Apache-2.0 License.
+This library is licensed under [Apache 2.0 License](./LICENSE).
 
-## File Structure
+## Anonymous operational metrics
 
-Upon successfully cloning the repository into your local development environment but prior to running the initialization script, you will see the following file structure in your editor:
-
-```
-├── CHANGELOG.md                       [Change log file]
-├── CODE_OF_CONDUCT.md                 [Code of conduct file]
-├── CONTRIBUTING.md                    [Contribution guide]
-├── LICENSE                            [LICENSE for this solution]
-├── NOTICE.txt                         [Notice for 3rd-party libraries]
-├── README.md                          [Read me file]
-├── buildspec.yml
-├── cdk.json
-├── codescan-prebuild-custom.sh
-├── deployment                         [shell scripts for packaging distribution assets]
-│   ├── build-open-source-dist.sh
-│   ├── build-s3-dist-1.sh
-│   ├── build-s3-dist.sh
-│   ├── cdk-solution-helper
-│   ├── post-build-1
-│   ├── run-all-test.sh
-│   ├── solution_config
-│   ├── test
-│   ├── test-build-dist.sh
-│   └── test-deploy-tag-images.sh
-├── docs                               [document]
-│   ├── en
-│   ├── index.html
-│   ├── mkdocs.base.yml
-│   ├── mkdocs.en.yml
-│   ├── mkdocs.zh.yml
-│   ├── site
-│   ├── test-deploy-mkdocs.sh
-│   └── zh
-├── examples                           [example code]
-│   ├── custom-plugins
-│   └── standalone-data-generator
-├── frontend                           [frontend source code]
-│   ├── README.md
-│   ├── build
-│   ├── config
-│   ├── esbuild.ts
-│   ├── node_modules
-│   ├── package.json
-│   ├── public
-│   ├── scripts
-│   ├── src
-│   ├── tsconfig.json
-├── package.json
-├── sonar-project.properties
-├── src                                [all backend source code]
-│   ├── alb-control-plane-stack.ts
-│   ├── analytics
-│   ├── base-lib
-│   ├── cloudfront-control-plane-stack.ts
-│   ├── common
-│   ├── control-plane
-│   ├── data-analytics-redshift-stack.ts
-│   ├── data-modeling-athena-stack.ts
-│   ├── data-pipeline
-│   ├── data-pipeline-stack.ts
-│   ├── data-reporting-quicksight-stack.ts
-│   ├── ingestion-server
-│   ├── ingestion-server-stack.ts
-│   ├── kafka-s3-connector-stack.ts
-│   ├── main.ts
-│   ├── metrics
-│   ├── metrics-stack.ts
-│   └── reporting
-├── test                               [test code]
-│   ├── analytics
-│   ├── common
-│   ├── constants.ts
-│   ├── control-plane
-│   ├── data-pipeline
-│   ├── ingestion-server
-│   ├── jestEnv.js
-│   ├── metrics
-│   ├── reporting
-│   ├── rules.ts
-│   └── utils.ts
-├── tsconfig.dev.json
-├── tsconfig.json
-```
-
-[android-sdk]: https://github.com/awslabs/clickstream-android
-[swift-sdk]: https://github.com/awslabs/clickstream-swift
-[flutter-sdk]: https://github.com/awslabs/clickstream-flutter
-[react-native-sdk]: https://github.com/awslabs/clickstream-react-native
-[web-sdk]: https://github.com/awslabs/clickstream-web
-[wechat-sdk]: https://github.com/awslabs/clickstream-wechat
-[http-api]: https://awslabs.github.io/clickstream-analytics-on-aws/en/latest/sdk-manual/http-api/
-[configure-aws-cli]: https://docs.aws.amazon.com/zh_cn/cli/latest/userguide/cli-chap-configure.html
-[aws-cdk]: https://aws.amazon.com/cdk/
-[doc-arch]: https://docs.aws.amazon.com/solutions/latest/clickstream-analytics-on-aws/architecture-overview.html
-[doc-deployment]: https://docs.aws.amazon.com/solutions/latest/clickstream-analytics-on-aws/deployment.html
-[sdk-samples]: https://github.com/aws-samples/clickstream-sdk-samples
+This solution collects anonymous operational metrics to help AWS improve the quality and features of the solution. For more information, including how to disable this capability, please see the [implementation guide](https://docs.aws.amazon.com/solutions/latest/clickstream-analytics-on-aws/solution-overview.html).

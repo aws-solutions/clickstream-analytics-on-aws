@@ -1,0 +1,16 @@
+module: Clickstream
+author: Amazon Web Services
+github_url: https://github.com/awslabs/clickstream-swift
+
+swift-build-tool: spm
+clean: true
+skip_undocumented: false
+undocumented_text: ""
+hide_documentation_coverage: true
+sdk: iphone
+theme: apple
+build_tool_arguments:
+  - -Xswiftc
+  - -swift-version
+  - -Xswiftc
+  - "5"

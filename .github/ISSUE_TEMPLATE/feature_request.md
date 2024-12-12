@@ -1,31 +1,16 @@
 ---
-name: "\U0001F680 Feature Request"
-about: Request a new feature
-title: ""
-labels: feature-request, needs-triage
+name: Feature request
+about: Suggest an idea for this solution
+title: ''
+labels: enhancement
+assignees: ''
 ---
 
-## Describe the feature
+**Is your feature request related to a problem? Please describe.**
+A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
 
-<!-- A clear and concise description of the feature you are proposing. -->
+**Describe the feature you'd like**
+A clear and concise description of what you want to happen.
 
-## Use Case
-
-<!-- Why do you need this feature? For example: "I’m always frustrated when..." -->
-
-## Proposed Solution - Optional
-
-<!--Suggest how to implement the addition or change. Please include prototype/workaround/sketch/reference implementation. -->
-
-## Other Information
-
-<!-- Any alternative solutions or features you considered, a more detailed explanation, stack traces, related issues, links for context, etc. -->
-
-**Notes**:
-
-- [ ] this feature has an UI update
-- [ ] this feature contains an implementation guide update
-
----
-
-This is a :rocket: Feature Request
+**Additional context**
+Add any other context or screenshots about the feature request here.

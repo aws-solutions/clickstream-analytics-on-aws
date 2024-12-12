@@ -1,0 +1,7 @@
+Appium-Python-Client~=3.1.1
+pytest~=7.4.3
+boto3~=1.34.11
+requests~=2.32.3
+PyYAML~=6.0.1
+pytest-html~=4.1.1
+selenium~=4.17.2

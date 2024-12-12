@@ -1,9 +1,0 @@
-data_dir = "/var/lib/vector/"
-timezone = "UTC"
-healthchecks.enabled = true
-acknowledgements.enabled = false
-
-[api]
-enabled = true
-address = "0.0.0.0:8686"
-

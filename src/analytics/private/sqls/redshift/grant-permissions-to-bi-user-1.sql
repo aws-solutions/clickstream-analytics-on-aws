@@ -1,1 +1,0 @@
-GRANT USAGE ON SCHEMA {{schema}} TO {{user_bi}};

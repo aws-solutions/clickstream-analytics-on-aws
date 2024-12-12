@@ -1,0 +1,15 @@
+{
+  "UserAgent": "aws-solution/clickstream",
+  "Version": "1.0",
+  "analytics": {
+    "plugins": {
+      "awsClickstreamPlugin": {
+        "appId": "testAppId",
+        "endpoint": "http://example.com/collect",
+        "isCompressEvents": true,
+        "autoFlushEventsInterval": 10000,
+        "isTrackAppExceptionEvents": false
+      }
+    }
+  }
+}
