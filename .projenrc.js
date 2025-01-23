@@ -14,7 +14,7 @@
 const { awscdk, gitlab, javascript, typescript, JsonPatch } = require('projen');
 const Nx = require('./projenrc/nx');
 const PnpmWorkspace = require('./projenrc/pnpm');
-const version = '1.2.0';
+const version = '1.1.9';
 const cdkVersion = '2.81.0';
 const minNodeVersion = '20.12.0';
 const pnpmVersion = '8.15.3';

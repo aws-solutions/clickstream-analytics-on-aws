@@ -29,6 +29,14 @@ if [ -z "$1" ]; then
     exit 1
 fi
 
+# Check to see if the required tools have been installed
+for cmd in rsync zip; do
+    if ! command -v $cmd &> /dev/null; then
+        echo "Error: $cmd is not installed"
+        exit 1
+    fi
+done
+
 # Get reference for all important folders
 source_template_dir="$PWD"
 dist_dir="$source_template_dir/open-source"
@@ -48,8 +56,14 @@ echo "--------------------------------------------------------------------------
 echo "[Packing] all source files"
 echo "------------------------------------------------------------------------------"
 
-echo "rsync -av --exclude-from='../.gitignore' $source_dir $dist_dir"
-rsync -av --exclude-from='../.gitignore' $source_dir $dist_dir
+echo "
+Config
+.nightswatch
+.crux_template.md
+test/functional_tests
+" > exclude-open-source-list.txt
+echo "rsync -av --exclude-from='exclude-open-source-list.txt' --exclude-from='../.gitignore' $source_dir $dist_dir"
+rsync -av --exclude-from='exclude-open-source-list.txt' --exclude-from='../.gitignore' $source_dir $dist_dir
 
 echo "------------------------------------------------------------------------------"
 echo "[Packing] Create GitHub (open-source) zip file"
