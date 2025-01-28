@@ -140,7 +140,7 @@
   },
   "main": "lib/index.js",
   "license": "Apache-2.0",
-  "version": "1.2.0",
+  "version": "1.1.9",
   "jest": {
     "roots": [
       "<rootDir>/src",

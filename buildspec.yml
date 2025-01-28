@@ -83,5 +83,7 @@ phases:
         function join_by { local IFS="$1"; shift; echo "$*"; }
         export ECR_REPOS=$(join_by , `cat "${__dir}/ecr-repos"`)
 artifacts:
+  exclude-paths:
+    - .nightswatch/**/*
   files:
     - '**/*'

@@ -1,6 +1,7 @@
 # Use of opensource-codeofconduct email for amazon is expected
 CONTRIBUTING.md
 CODE_OF_CONDUCT.md
+SECURITY.md
 
 .github/
 cdk.out/*
