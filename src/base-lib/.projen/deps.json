@@ -10,18 +10,12 @@
       "type": "build"
     },
     {
+      "name": "@types/node",
+      "type": "build"
+    },
+    {
       "name": "@types/node-fetch",
       "version": "^2.6.4",
-      "type": "build"
-    },
-    {
-      "name": "@types/node",
-      "version": "^18",
-      "type": "build"
-    },
-    {
-      "name": "constructs",
-      "version": "^10.0.0",
       "type": "build"
     },
     {
@@ -30,11 +24,7 @@
     },
     {
       "name": "jest-junit",
-      "version": "^15",
-      "type": "build"
-    },
-    {
-      "name": "projen",
+      "version": "^16",
       "type": "build"
     },
     {

@@ -17,7 +17,7 @@ v20.12.0
 
 In the root project directory, you can run:
 
-### `pnpm install -g pnpm@8.15.3`
+### `pnpm install -g pnpm@9.15.3`
 
 ### `pnpm install && pnpm projen`
 

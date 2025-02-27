@@ -458,8 +458,8 @@ function Content() {
                           : t('upload.dropFileToUpload'),
                       removeFileAriaLabel: (e) =>
                         `${t('upload.removeFile')} ${e + 1}`,
-                      limitShowFewer: t('upload.limitShowFewer'),
-                      limitShowMore: t('upload.limitShowMore'),
+                      limitShowFewer: t('upload.limitShowFewer') ?? undefined,
+                      limitShowMore: t('upload.limitShowMore') ?? undefined,
                       errorIconAriaLabel: defaultStr(
                         t('upload.errorIconAriaLabel')
                       ),
@@ -498,8 +498,8 @@ function Content() {
                           : t('upload.dropFileToUpload'),
                       removeFileAriaLabel: (e) =>
                         `${t('upload.removeFile')} ${e + 1}`,
-                      limitShowFewer: t('upload.limitShowFewer'),
-                      limitShowMore: t('upload.limitShowMore'),
+                      limitShowFewer: t('upload.limitShowFewer') ?? undefined,
+                      limitShowMore: t('upload.limitShowMore') ?? undefined,
                       errorIconAriaLabel: defaultStr(
                         t('upload.errorIconAriaLabel')
                       ),
