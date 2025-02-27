@@ -49,7 +49,7 @@ Follow the [implementation guide][doc-deployment] to deploy the solution using A
 - Configure [credential of aws cli][configure-aws-cli]
 - Install Node.js LTS version 20.12.0 or later
 - Install Docker Engine
-- Install pnpm `npm install -g pnpm@8.15.3`
+- Install pnpm `npm install -g pnpm@9.15.3`
 - Install the dependencies of the solution by executing the command `pnpm install && pnpm projen && pnpm nx build @aws/clickstream-base-lib`
 - Initialize the CDK toolkit stack into AWS environment (only for deploying via [AWS CDK][aws-cdk] for the first time), and run `npx cdk bootstrap`
 

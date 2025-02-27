@@ -137,34 +137,34 @@ export class CIngestionServerStack extends JSONObject {
   }
 
   @JSONObject.required
-    _pipeline?: IPipeline;
+  _pipeline?: IPipeline;
 
   @JSONObject.required
-    _resources?: CPipelineResources;
+  _resources?: CPipelineResources;
 
   @JSONObject.optional('No')
   @JSONObject.custom( (stack :CIngestionServerStack, _key:string, _value:any) => {
     return stack._resources?.project?.environment == ProjectEnvironment.DEV ? 'Yes' : 'No';
   })
-    DevMode?: string;
+  DevMode?: string;
 
   @JSONObject.optional('No')
   @JSONObject.custom( (stack :CIngestionServerStack, _key:string, _value:any) => {
     return stack._pipeline?.dataCollectionSDK == DataCollectionSDK.CLICKSTREAM ? 'Yes' : 'No';
   })
-    ClickStreamSDK?: string;
+  ClickStreamSDK?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack :CIngestionServerStack, _key:string, _value:any) => {
     return stack._pipeline?.projectId;
   })
-    ProjectId?: string;
+  ProjectId?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack :CIngestionServerStack, _key:string, _value:any) => {
     return stack._resources?.appIds?.join(',');
   })
-    AppIds?: string;
+  AppIds?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack :CIngestionServerStack, key:string, _value:any) => {
@@ -172,7 +172,7 @@ export class CIngestionServerStack extends JSONObject {
     validatePattern(key, VPC_ID_PATTERN, defaultValue);
     return defaultValue;
   })
-    VpcId?: string;
+  VpcId?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack :CIngestionServerStack, key:string, _value:any) => {
@@ -183,7 +183,7 @@ export class CIngestionServerStack extends JSONObject {
     validatePattern(key, SUBNETS_PATTERN, defaultValue);
     return defaultValue;
   })
-    PublicSubnetIds?: string;
+  PublicSubnetIds?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack :CIngestionServerStack, key:string, _value:any) => {
@@ -194,13 +194,13 @@ export class CIngestionServerStack extends JSONObject {
     validatePattern(key, SUBNETS_PATTERN, defaultValue);
     return defaultValue;
   })
-    PrivateSubnetIds?: string;
+  PrivateSubnetIds?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack :CIngestionServerStack, _key:string, _value:any) => {
     return stack._pipeline?.ingestionServer.loadBalancer.protocol;
   })
-    Protocol?: PipelineServerProtocol;
+  Protocol?: PipelineServerProtocol;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack:CIngestionServerStack, key:string, _value:string) => {
@@ -210,19 +210,19 @@ export class CIngestionServerStack extends JSONObject {
     }
     return stack.Protocol == PipelineServerProtocol.HTTPS ? defaultValue : '';
   })
-    DomainName?: string;
+  DomainName?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack:CIngestionServerStack, _key:string, _value:string) => {
     return stack._pipeline?.ingestionServer.domain?.certificateArn ?? '';
   })
-    ACMCertificateArn?: string;
+  ACMCertificateArn?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack:CIngestionServerStack, _key:string, _value:string) => {
     return stack._pipeline?.ingestionServer.loadBalancer.serverEndpointPath;
   })
-    ServerEndpointPath?: string;
+  ServerEndpointPath?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack:CIngestionServerStack, key:string, _value:string) => {
@@ -233,7 +233,7 @@ export class CIngestionServerStack extends JSONObject {
     }
     return defaultValue;
   })
-    ServerCorsOrigin?: string;
+  ServerCorsOrigin?: string;
 
   @JSONObject.optional(0)
   @JSONObject.gt(0)
@@ -244,7 +244,7 @@ export class CIngestionServerStack extends JSONObject {
     }
     return defaultValue;
   })
-    ServerMax?: number;
+  ServerMax?: number;
 
   @JSONObject.optional(0)
   @JSONObject.gt(0)
@@ -255,14 +255,14 @@ export class CIngestionServerStack extends JSONObject {
     }
     return defaultValue;
   })
-    ServerMin?: number;
+  ServerMin?: number;
 
   @JSONObject.optional(0)
   @JSONObject.gte(0)
   @JSONObject.custom( (stack:CIngestionServerStack, _key:string, _value:string) => {
     return stack._pipeline?.ingestionServer.size.warmPoolSize ?? 0;
   })
-    WarmPoolSize?: number;
+  WarmPoolSize?: number;
 
   @JSONObject.optional(50)
   @JSONObject.gte(0)
@@ -270,43 +270,43 @@ export class CIngestionServerStack extends JSONObject {
   @JSONObject.custom( (stack:CIngestionServerStack, _key:string, _value:string) => {
     return stack._pipeline?.ingestionServer.size.scaleOnCpuUtilizationPercent ?? 50;
   })
-    ScaleOnCpuUtilizationPercent?: number;
+  ScaleOnCpuUtilizationPercent?: number;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack:CIngestionServerStack, _key:string, _value:string) => {
     return stack._pipeline?.ingestionServer.loadBalancer.notificationsTopicArn ?? '';
   })
-    NotificationsTopicArn?: string;
+  NotificationsTopicArn?: string;
 
   @JSONObject.optional('No')
   @JSONObject.custom( (stack:CIngestionServerStack, _key:string, _value:string) => {
     return stack._pipeline?.ingestionServer.loadBalancer.enableGlobalAccelerator ? 'Yes' : 'No';
   })
-    EnableGlobalAccelerator?: string;
+  EnableGlobalAccelerator?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack:CIngestionServerStack, _key:string, _value:string) => {
     return stack._pipeline?.ingestionServer.loadBalancer.authenticationSecretArn ?? '';
   })
-    AuthenticationSecretArn?: string;
+  AuthenticationSecretArn?: string;
 
   @JSONObject.optional('No')
   @JSONObject.custom( (stack:CIngestionServerStack, _key:string, _value:string) => {
     return stack._pipeline?.ingestionServer.loadBalancer.authenticationSecretArn ? 'Yes' : 'No';
   })
-    EnableAuthentication?: string;
+  EnableAuthentication?: string;
 
   @JSONObject.optional('No')
   @JSONObject.custom( (stack:CIngestionServerStack, _key:string, _value:string) => {
     return stack._pipeline?.ingestionServer.loadBalancer.enableApplicationLoadBalancerAccessLog ? 'Yes' : 'No';
   })
-    EnableApplicationLoadBalancerAccessLog?: string;
+  EnableApplicationLoadBalancerAccessLog?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack:CIngestionServerStack, _key:string, _value:string) => {
     return stack._pipeline?.ingestionServer.loadBalancer.logS3Bucket?.name ?? stack._pipeline?.bucket.name;
   })
-    LogS3Bucket?: string;
+  LogS3Bucket?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack:CIngestionServerStack, key:string, _value:string) => {
@@ -318,7 +318,7 @@ export class CIngestionServerStack extends JSONObject {
     validatePattern(key, S3_PREFIX_PATTERN, defaultValue);
     return defaultValue;
   })
-    LogS3Prefix?: string;
+  LogS3Prefix?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack:CIngestionServerStack, _key:string, _value:string) => {
@@ -327,7 +327,7 @@ export class CIngestionServerStack extends JSONObject {
     }
     return stack._pipeline?.ingestionServer.sinkS3?.sinkBucket.name ?? stack._pipeline?.bucket.name;
   })
-    S3DataBucket?: string;
+  S3DataBucket?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack:CIngestionServerStack, key:string, _value:string) => {
@@ -341,7 +341,7 @@ export class CIngestionServerStack extends JSONObject {
     validatePattern(key, S3_PREFIX_PATTERN, defaultValue);
     return defaultValue;
   })
-    S3DataPrefix?: string;
+  S3DataPrefix?: string;
 
   @JSONObject.optional(30000000)
   @JSONObject.gte(1000000)
@@ -353,7 +353,7 @@ export class CIngestionServerStack extends JSONObject {
     const defaultValue = stack._pipeline?.ingestionServer.sinkS3?.s3BufferSize ?? 30;
     return defaultValue * 1000 * 1000;
   })
-    S3BatchMaxBytes?: number;
+  S3BatchMaxBytes?: number;
 
   @JSONObject.optional(300)
   @JSONObject.gte(30)
@@ -364,7 +364,7 @@ export class CIngestionServerStack extends JSONObject {
     }
     return stack._pipeline?.ingestionServer.sinkS3?.s3BufferInterval ?? 300;
   })
-    S3BatchTimeout?: number;
+  S3BatchTimeout?: number;
 
   @JSONObject.optional(330)
   @JSONObject.gte(60)
@@ -375,7 +375,7 @@ export class CIngestionServerStack extends JSONObject {
     }
     return undefined;
   })
-    WorkerStopTimeout?: number;
+  WorkerStopTimeout?: number;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack:CIngestionServerStack, _key:string, _value:string) => {
@@ -384,7 +384,7 @@ export class CIngestionServerStack extends JSONObject {
     }
     return stack._pipeline?.ingestionServer.sinkKafka?.mskCluster?.name ?? '';
   })
-    MskClusterName?: string;
+  MskClusterName?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack:CIngestionServerStack, key:string, _value:string) => {
@@ -395,7 +395,7 @@ export class CIngestionServerStack extends JSONObject {
     validatePattern(key, MULTI_SECURITY_GROUP_PATTERN, defaultValue);
     return defaultValue;
   })
-    MskSecurityGroupId?: string;
+  MskSecurityGroupId?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack:CIngestionServerStack, key:string, _value:string) => {
@@ -406,7 +406,7 @@ export class CIngestionServerStack extends JSONObject {
     validatePattern(key, KAFKA_TOPIC_PATTERN, defaultValue);
     return defaultValue;
   })
-    KafkaTopic?: string;
+  KafkaTopic?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack:CIngestionServerStack, key:string, _value:string) => {
@@ -420,7 +420,7 @@ export class CIngestionServerStack extends JSONObject {
     validatePattern(key, KAFKA_BROKERS_PATTERN, defaultValue);
     return defaultValue;
   })
-    KafkaBrokers?: string;
+  KafkaBrokers?: string;
 
   @JSONObject.optional(KinesisStreamMode.ON_DEMAND)
   @JSONObject.custom( (stack:CIngestionServerStack, _key:string, _value:string) => {
@@ -429,7 +429,7 @@ export class CIngestionServerStack extends JSONObject {
     }
     return stack._pipeline?.ingestionServer.sinkKinesis?.kinesisStreamMode ?? KinesisStreamMode.ON_DEMAND;
   })
-    KinesisStreamMode?: KinesisStreamMode;
+  KinesisStreamMode?: KinesisStreamMode;
 
   @JSONObject.optional(3)
   @JSONObject.gte(1)
@@ -439,7 +439,7 @@ export class CIngestionServerStack extends JSONObject {
     }
     return stack._pipeline?.ingestionServer.sinkKinesis?.kinesisShardCount ?? 3;
   })
-    KinesisShardCount?: number;
+  KinesisShardCount?: number;
 
   @JSONObject.optional(24)
   @JSONObject.gte(24)
@@ -450,7 +450,7 @@ export class CIngestionServerStack extends JSONObject {
     }
     return stack._pipeline?.ingestionServer.sinkKinesis?.kinesisDataRetentionHours ?? 24;
   })
-    KinesisDataRetentionHours?: number;
+  KinesisDataRetentionHours?: number;
 
   @JSONObject.optional(10000)
   @JSONObject.gte(1)
@@ -461,7 +461,7 @@ export class CIngestionServerStack extends JSONObject {
     }
     return stack._pipeline?.ingestionServer.sinkBatch?.size ?? 10000;
   })
-    KinesisBatchSize?: number;
+  KinesisBatchSize?: number;
 
   @JSONObject.optional(300)
   @JSONObject.gte(0)
@@ -472,7 +472,7 @@ export class CIngestionServerStack extends JSONObject {
     }
     return stack._pipeline?.ingestionServer.sinkBatch?.intervalSeconds ?? 300;
   })
-    KinesisMaxBatchingWindowSeconds?: number;
+  KinesisMaxBatchingWindowSeconds?: number;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack:CIngestionServerStack, _key:string, _value:string) => {
@@ -481,7 +481,7 @@ export class CIngestionServerStack extends JSONObject {
     }
     return stack._pipeline?.ingestionServer.sinkKinesis?.sinkBucket.name ?? stack._pipeline?.bucket.name;
   })
-    KinesisDataS3Bucket?: string;
+  KinesisDataS3Bucket?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack:CIngestionServerStack, key:string, _value:string) => {
@@ -496,26 +496,26 @@ export class CIngestionServerStack extends JSONObject {
     validatePattern(key, S3_PREFIX_PATTERN, defaultValue);
     return defaultValue;
   })
-    KinesisDataS3Prefix?: string;
+  KinesisDataS3Prefix?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack:CIngestionServerStack, _key:string, _value:string) => {
     return getSinkType(stack._pipeline!);
   })
-    SinkType?: string;
+  SinkType?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack:CIngestionServerStack, _key:string, _value:string) => {
     return getAppRegistryApplicationArn(stack._pipeline);
   })
   @supportVersions([SolutionVersion.V_1_1_0, SolutionVersion.ANY])
-    AppRegistryApplicationArn?: string;
+  AppRegistryApplicationArn?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (_stack:CIngestionServerStack, _key:string, _value:string) => {
     return getIamRoleBoundaryArn();
   })
-    IamRoleBoundaryArn?: string;
+  IamRoleBoundaryArn?: string;
 
   constructor(pipeline: IPipeline, resources: CPipelineResources) {
     if (pipeline.ingestionServer.sinkBatch) {
@@ -555,23 +555,23 @@ export class CKafkaConnectorStack extends JSONObject {
   }
 
   @JSONObject.required
-    _pipeline?: IPipeline;
+  _pipeline?: IPipeline;
 
   @JSONObject.required
-    _resources?: CPipelineResources;
+  _resources?: CPipelineResources;
 
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack :CKafkaConnectorStack, _key:string, _value:any) => {
     return stack._pipeline?.projectId;
   })
-    ProjectId?: string;
+  ProjectId?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack :CKafkaConnectorStack, _key:string, _value:any) => {
     return stack._pipeline?.ingestionServer.sinkKafka?.kafkaConnector.sinkBucket?.name ?? stack._pipeline?.bucket.name;
   })
-    DataS3Bucket?: string;
+  DataS3Bucket?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack :CKafkaConnectorStack, key:string, _value:any) => {
@@ -582,13 +582,13 @@ export class CKafkaConnectorStack extends JSONObject {
     validatePattern(key, S3_PREFIX_PATTERN, defaultValue);
     return defaultValue;
   })
-    DataS3Prefix?: string;
+  DataS3Prefix?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack :CKafkaConnectorStack, _key:string, _value:any) => {
     return stack._pipeline?.bucket.name;
   })
-    LogS3Bucket?: string;
+  LogS3Bucket?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack :CKafkaConnectorStack, key:string, _value:any) => {
@@ -599,13 +599,13 @@ export class CKafkaConnectorStack extends JSONObject {
     validatePattern(key, S3_PREFIX_PATTERN, defaultValue);
     return defaultValue;
   })
-    LogS3Prefix?: string;
+  LogS3Prefix?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack :CKafkaConnectorStack, _key:string, _value:any) => {
     return stack._pipeline?.bucket.name;
   })
-    PluginS3Bucket?: string;
+  PluginS3Bucket?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack :CKafkaConnectorStack, key:string, _value:any) => {
@@ -616,7 +616,7 @@ export class CKafkaConnectorStack extends JSONObject {
     validatePattern(key, S3_PREFIX_PATTERN, defaultValue);
     return defaultValue;
   })
-    PluginS3Prefix?: string;
+  PluginS3Prefix?: string;
 
 
   @JSONObject.optional('')
@@ -625,7 +625,7 @@ export class CKafkaConnectorStack extends JSONObject {
     validatePattern(key, SUBNETS_PATTERN, defaultValue);
     return defaultValue;
   })
-    SubnetIds?: string;
+  SubnetIds?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack :CKafkaConnectorStack, key:string, _value:any) => {
@@ -633,7 +633,7 @@ export class CKafkaConnectorStack extends JSONObject {
     validatePattern(key, SECURITY_GROUP_PATTERN, defaultValue);
     return defaultValue;
   })
-    SecurityGroupId?: string;
+  SecurityGroupId?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack:CKafkaConnectorStack, key:string, _value:string) => {
@@ -647,7 +647,7 @@ export class CKafkaConnectorStack extends JSONObject {
     validatePattern(key, KAFKA_BROKERS_PATTERN, defaultValue);
     return defaultValue;
   })
-    KafkaBrokers?: string;
+  KafkaBrokers?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack:CKafkaConnectorStack, key:string, _value:string) => {
@@ -658,20 +658,20 @@ export class CKafkaConnectorStack extends JSONObject {
     validatePattern(key, KAFKA_TOPIC_PATTERN, defaultValue);
     return defaultValue;
   })
-    KafkaTopic?: string;
+  KafkaTopic?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack :CKafkaConnectorStack, _key:string, _value:any) => {
     return stack._pipeline?.ingestionServer.sinkKafka?.mskCluster?.name ?? '';
   })
-    MskClusterName?: string;
+  MskClusterName?: string;
 
   @JSONObject.optional(3)
   @JSONObject.gte(1)
   @JSONObject.custom( (stack :CKafkaConnectorStack, _key:string, _value:any) => {
     return stack._pipeline?.ingestionServer.sinkKafka?.kafkaConnector.maxWorkerCount ?? 3;
   })
-    MaxWorkerCount?: number;
+  MaxWorkerCount?: number;
 
   @JSONObject.optional(1)
   @JSONObject.gte(1)
@@ -682,14 +682,14 @@ export class CKafkaConnectorStack extends JSONObject {
     }
     return defaultValue;
   })
-    MinWorkerCount?: number;
+  MinWorkerCount?: number;
 
   @JSONObject.optional(1)
   @JSONObject.gte(1)
   @JSONObject.custom( (stack :CKafkaConnectorStack, _key:string, _value:any) => {
     return stack._pipeline?.ingestionServer.sinkKafka?.kafkaConnector.workerMcuCount ?? 1;
   })
-    WorkerMcuCount?: number;
+  WorkerMcuCount?: number;
 
   @JSONObject.optional(3000000)
   @JSONObject.gte(0)
@@ -697,7 +697,7 @@ export class CKafkaConnectorStack extends JSONObject {
   @JSONObject.custom( (stack :CKafkaConnectorStack, _key:string, _value:any) => {
     return stack._pipeline?.ingestionServer.sinkBatch?.intervalSeconds ? stack._pipeline?.ingestionServer.sinkBatch?.intervalSeconds * 1000 : 3000000;
   })
-    RotateIntervalMS?: number;
+  RotateIntervalMS?: number;
 
   @JSONObject.optional(50000)
   @JSONObject.gte(1)
@@ -705,20 +705,20 @@ export class CKafkaConnectorStack extends JSONObject {
   @JSONObject.custom( (stack :CKafkaConnectorStack, _key:string, _value:any) => {
     return stack._pipeline?.ingestionServer.sinkBatch?.size ?? 50000;
   })
-    FlushSize?: number;
+  FlushSize?: number;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack:CIngestionServerStack, _key:string, _value:string) => {
     return getAppRegistryApplicationArn(stack._pipeline);
   })
   @supportVersions([SolutionVersion.V_1_1_0, SolutionVersion.ANY])
-    AppRegistryApplicationArn?: string;
+  AppRegistryApplicationArn?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (_stack:CIngestionServerStack, _key:string, _value:string) => {
     return getIamRoleBoundaryArn();
   })
-    IamRoleBoundaryArn?: string;
+  IamRoleBoundaryArn?: string;
 
   constructor(pipeline: IPipeline, resources: CPipelineResources) {
     if (pipeline.ingestionServer.sinkBatch) {
@@ -753,10 +753,10 @@ export class CDataProcessingStack extends JSONObject {
   }
 
   @JSONObject.required
-    _pipeline?: IPipeline;
+  _pipeline?: IPipeline;
 
   @JSONObject.required
-    _resources?: CPipelineResources;
+  _resources?: CPipelineResources;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack :CDataProcessingStack, key:string, _value:any) => {
@@ -764,7 +764,7 @@ export class CDataProcessingStack extends JSONObject {
     validatePattern(key, VPC_ID_PATTERN, defaultValue);
     return defaultValue;
   })
-    VpcId?: string;
+  VpcId?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack :CDataProcessingStack, key:string, _value:any) => {
@@ -772,19 +772,19 @@ export class CDataProcessingStack extends JSONObject {
     validatePattern(key, SUBNETS_PATTERN, defaultValue);
     return defaultValue;
   })
-    PrivateSubnetIds?: string;
+  PrivateSubnetIds?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack :CDataProcessingStack, _key:string, _value:any) => {
     return stack._pipeline?.projectId;
   })
-    ProjectId?: string;
+  ProjectId?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack :CDataProcessingStack, _key:string, _value:any) => {
     return stack._resources?.appIds?.join(',');
   })
-    AppIds?: string;
+  AppIds?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack:CDataProcessingStack, _key:string, _value:string) => {
@@ -798,7 +798,7 @@ export class CDataProcessingStack extends JSONObject {
     }
     return defaultValue;
   })
-    SourceS3Bucket?: string;
+  SourceS3Bucket?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack:CDataProcessingStack, key:string, _value:string) => {
@@ -824,13 +824,13 @@ export class CDataProcessingStack extends JSONObject {
     validatePattern(key, S3_PREFIX_PATTERN, defaultValue);
     return defaultValue;
   })
-    SourceS3Prefix?: string;
+  SourceS3Prefix?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack :CDataProcessingStack, _key:string, _value:any) => {
     return stack._pipeline?.dataProcessing?.sinkS3Bucket.name ?? stack._pipeline?.bucket.name;
   })
-    SinkS3Bucket?: string;
+  SinkS3Bucket?: string;
 
   @JSONObject.required
   @JSONObject.optional('')
@@ -843,13 +843,13 @@ export class CDataProcessingStack extends JSONObject {
     validatePattern(key, S3_PREFIX_PATTERN, defaultValue);
     return defaultValue;
   })
-    SinkS3Prefix?: string;
+  SinkS3Prefix?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack :CDataProcessingStack, _key:string, _value:any) => {
     return stack._pipeline?.dataProcessing?.pipelineBucket.name ?? stack._pipeline?.bucket.name;
   })
-    PipelineS3Bucket?: string;
+  PipelineS3Bucket?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack :CDataProcessingStack, key:string, _value:string) => {
@@ -861,14 +861,14 @@ export class CDataProcessingStack extends JSONObject {
     validatePattern(key, S3_PREFIX_PATTERN, defaultValue);
     return defaultValue;
   })
-    PipelineS3Prefix?: string;
+  PipelineS3Prefix?: string;
 
   @JSONObject.optional(72)
   @JSONObject.gt(0)
   @JSONObject.custom( (stack :CDataProcessingStack, _key:string, _value:any) => {
     return stack._pipeline?.dataProcessing?.dataFreshnessInHour ?? 72;
   })
-    DataFreshnessInHour?: number;
+  DataFreshnessInHour?: number;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack :CDataProcessingStack, _key:string, _value:any) => {
@@ -876,14 +876,14 @@ export class CDataProcessingStack extends JSONObject {
     validateDataProcessingInterval(defaultValue);
     return defaultValue;
   })
-    ScheduleExpression?: string;
+  ScheduleExpression?: string;
 
   @JSONObject.optional(TRANSFORMER_AND_ENRICH_CLASS_NAMES)
   @JSONObject.custom( (stack :CDataProcessingStack, _key:string, _value:string) => {
     const pluginInfo = getPluginInfo(stack._pipeline!, stack._resources!);
     return pluginInfo.transformerAndEnrichClassNames.join(',');
   })
-    TransformerAndEnrichClassNames?: string;
+  TransformerAndEnrichClassNames?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack :CDataProcessingStack, key:string, _value:string) => {
@@ -894,7 +894,7 @@ export class CDataProcessingStack extends JSONObject {
     }
     return defaultValue;
   })
-    S3PathPluginJars?: string;
+  S3PathPluginJars?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack :CDataProcessingStack, key:string, _value:string) => {
@@ -905,26 +905,26 @@ export class CDataProcessingStack extends JSONObject {
     }
     return defaultValue;
   })
-    S3PathPluginFiles?: string;
+  S3PathPluginFiles?: string;
 
   @JSONObject.optional('parquet')
   @JSONObject.custom( (stack :CDataProcessingStack, _key:string, _value:any) => {
     return stack._pipeline?.dataProcessing?.outputFormat ?? 'parquet';
   })
-    OutputFormat?: string;
+  OutputFormat?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack:CDataProcessingStack, _key:string, _value:string) => {
     return getAppRegistryApplicationArn(stack._pipeline);
   })
   @supportVersions([SolutionVersion.V_1_1_0, SolutionVersion.ANY])
-    AppRegistryApplicationArn?: string;
+  AppRegistryApplicationArn?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (_stack:CDataProcessingStack, _key:string, _value:string) => {
     return getIamRoleBoundaryArn();
   })
-    IamRoleBoundaryArn?: string;
+  IamRoleBoundaryArn?: string;
 
   constructor(pipeline: IPipeline, resources: CPipelineResources) {
 
@@ -956,10 +956,10 @@ export class CDataModelingStack extends JSONObject {
   }
 
   @JSONObject.required
-    _pipeline?: IPipeline;
+  _pipeline?: IPipeline;
 
   @JSONObject.required
-    _resources?: CPipelineResources;
+  _resources?: CPipelineResources;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack :CDataModelingStack, key:string, _value:any) => {
@@ -967,7 +967,7 @@ export class CDataModelingStack extends JSONObject {
     validatePattern(key, VPC_ID_PATTERN, defaultValue);
     return defaultValue;
   })
-    VpcId?: string;
+  VpcId?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack :CDataModelingStack, key:string, _value:any) => {
@@ -975,25 +975,25 @@ export class CDataModelingStack extends JSONObject {
     validatePattern(key, SUBNETS_PATTERN, defaultValue);
     return defaultValue;
   })
-    PrivateSubnetIds?: string;
+  PrivateSubnetIds?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack :CDataModelingStack, _key:string, _value:any) => {
     return stack._pipeline?.projectId;
   })
-    ProjectId?: string;
+  ProjectId?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack :CDataModelingStack, _key:string, _value:any) => {
     return stack._resources?.appIds?.join(',');
   })
-    AppIds?: string;
+  AppIds?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack :CDataModelingStack, _key:string, _value:any) => {
     return stack._pipeline?.dataModeling?.ods?.bucket.name ?? stack._pipeline?.bucket.name;
   })
-    ODSEventBucket?: string;
+  ODSEventBucket?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack :CDataModelingStack, key:string, _value:any) => {
@@ -1005,20 +1005,20 @@ export class CDataModelingStack extends JSONObject {
     validatePattern(key, S3_PREFIX_PATTERN, defaultValue);
     return defaultValue;
   })
-    ODSEventPrefix?: string;
+  ODSEventPrefix?: string;
 
   @JSONObject.optional('.snappy.parquet')
   @JSONObject.custom( (stack :CDataModelingStack, _key:string, _value:any) => {
     return stack._pipeline?.dataModeling?.ods?.fileSuffix ?? '.snappy.parquet';
   })
-    ODSEventFileSuffix?: string;
+  ODSEventFileSuffix?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack :CDataModelingStack, _key:string, _value:any) => {
     return stack._pipeline?.dataProcessing?.pipelineBucket.name ?? stack._pipeline?.bucket.name;
   })
   @supportVersions([SolutionVersion.V_1_1_0, SolutionVersion.ANY])
-    PipelineS3Bucket?: string;
+  PipelineS3Bucket?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack :CDataModelingStack, key:string, _value:any) => {
@@ -1031,7 +1031,7 @@ export class CDataModelingStack extends JSONObject {
     return defaultValue;
   })
   @supportVersions([SolutionVersion.V_1_1_0, SolutionVersion.ANY])
-    PipelineS3Prefix?: string;
+  PipelineS3Prefix?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack :CDataModelingStack, key:string, _value:any) => {
@@ -1044,13 +1044,13 @@ export class CDataModelingStack extends JSONObject {
     return defaultValue;
   })
   @supportVersions([SolutionVersion.V_1_1_6, SolutionVersion.ANY])
-    SegmentsS3Prefix?: string;
+  SegmentsS3Prefix?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack :CDataModelingStack, _key:string, _value:any) => {
     return stack._pipeline?.dataModeling?.loadWorkflow?.bucket?.name ?? stack._pipeline?.bucket.name;
   })
-    LoadWorkflowBucket?: string;
+  LoadWorkflowBucket?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack :CDataModelingStack, key:string, _value:any) => {
@@ -1062,14 +1062,14 @@ export class CDataModelingStack extends JSONObject {
     validatePattern(key, S3_PREFIX_PATTERN, defaultValue);
     return defaultValue;
   })
-    LoadWorkflowBucketPrefix?: string;
+  LoadWorkflowBucketPrefix?: string;
 
   @JSONObject.optional(50)
   @JSONObject.gte(1)
   @JSONObject.custom( (stack :CDataModelingStack, _key:string, _value:any) => {
     return stack._pipeline?.dataModeling?.loadWorkflow?.maxFilesLimit ?? 50;
   })
-    MaxFilesLimit?: number;
+  MaxFilesLimit?: number;
 
   @JSONObject.optional('cron(0 1 * * ? *)')
   @JSONObject.custom( (stack :CDataModelingStack, key:string, _value:any) => {
@@ -1077,14 +1077,14 @@ export class CDataModelingStack extends JSONObject {
     validatePattern(key, SCHEDULE_EXPRESSION_PATTERN, defaultValue);
     return defaultValue;
   })
-    DataProcessingCronOrRateExpression?: string;
+  DataProcessingCronOrRateExpression?: string;
 
   @JSONObject.optional('cron(0 17 * * ? *)')
   @JSONObject.custom( (_:any, key:string, value:any) => {
     validatePattern(key, SCHEDULE_EXPRESSION_PATTERN, value);
     return value;
   })
-    ClearExpiredEventsScheduleExpression?: string;
+  ClearExpiredEventsScheduleExpression?: string;
 
   @JSONObject.optional(365)
   @JSONObject.gte(1)
@@ -1095,7 +1095,7 @@ export class CDataModelingStack extends JSONObject {
     }
     return Math.floor(dataRange / 24 / 60);
   })
-    ClearExpiredEventsRetentionRangeDays?: number;
+  ClearExpiredEventsRetentionRangeDays?: number;
 
   @JSONObject.optional(REDSHIFT_MODE.NEW_SERVERLESS)
   @JSONObject.custom( (stack :CDataModelingStack, _key:string, value:any) => {
@@ -1106,7 +1106,7 @@ export class CDataModelingStack extends JSONObject {
     }
     return value;
   })
-    RedshiftMode?: REDSHIFT_MODE;
+  RedshiftMode?: REDSHIFT_MODE;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack :CDataModelingStack, key:string, value:any) => {
@@ -1118,7 +1118,7 @@ export class CDataModelingStack extends JSONObject {
     }
     return value;
   })
-    RedshiftClusterIdentifier?: string;
+  RedshiftClusterIdentifier?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack :CDataModelingStack, key:string, value:any) => {
@@ -1130,7 +1130,7 @@ export class CDataModelingStack extends JSONObject {
     }
     return value;
   })
-    RedshiftDbUser?: string;
+  RedshiftDbUser?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack :CDataModelingStack, _key:string, value:any) => {
@@ -1143,7 +1143,7 @@ export class CDataModelingStack extends JSONObject {
     }
     return value;
   })
-    NewRedshiftServerlessWorkgroupName?: string;
+  NewRedshiftServerlessWorkgroupName?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack :CDataModelingStack, _key:string, value:any) => {
@@ -1153,7 +1153,7 @@ export class CDataModelingStack extends JSONObject {
     }
     return value;
   })
-    RedshiftServerlessVPCId?: string;
+  RedshiftServerlessVPCId?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack :CDataModelingStack, _key:string, value:any) => {
@@ -1164,7 +1164,7 @@ export class CDataModelingStack extends JSONObject {
     }
     return value;
   })
-    RedshiftServerlessSubnets?: string;
+  RedshiftServerlessSubnets?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack :CDataModelingStack, _key:string, value:any) => {
@@ -1173,7 +1173,7 @@ export class CDataModelingStack extends JSONObject {
     }
     return value;
   })
-    RedshiftServerlessSGs?: string;
+  RedshiftServerlessSGs?: string;
 
   @JSONObject.optional(16)
   @JSONObject.gte(8)
@@ -1186,7 +1186,7 @@ export class CDataModelingStack extends JSONObject {
     }
     return value;
   })
-    RedshiftServerlessRPU?: number;
+  RedshiftServerlessRPU?: number;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack :CDataModelingStack, _key:string, value:any) => {
@@ -1195,7 +1195,7 @@ export class CDataModelingStack extends JSONObject {
     }
     return value;
   })
-    RedshiftServerlessNamespaceId?: string;
+  RedshiftServerlessNamespaceId?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack :CDataModelingStack, _key:string, value:any) => {
@@ -1204,7 +1204,7 @@ export class CDataModelingStack extends JSONObject {
     }
     return value;
   })
-    RedshiftServerlessWorkgroupId?: string;
+  RedshiftServerlessWorkgroupId?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack :CDataModelingStack, _key:string, value:any) => {
@@ -1213,7 +1213,7 @@ export class CDataModelingStack extends JSONObject {
     }
     return value;
   })
-    RedshiftServerlessWorkgroupName?: string;
+  RedshiftServerlessWorkgroupName?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack :CDataModelingStack, _key:string, value:any) => {
@@ -1222,7 +1222,7 @@ export class CDataModelingStack extends JSONObject {
     }
     return value;
   })
-    RedshiftServerlessIAMRole?: string;
+  RedshiftServerlessIAMRole?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack :CDataModelingStack, _key:string, _value:any) => {
@@ -1235,7 +1235,7 @@ export class CDataModelingStack extends JSONObject {
       OUTPUT_DATA_PROCESSING_EMR_SERVERLESS_APPLICATION_ID_SUFFIX,
     );
   })
-    EMRServerlessApplicationId?: string;
+  EMRServerlessApplicationId?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (_stack :CDataModelingStack, _key:string, _value:any) => {
@@ -1243,7 +1243,7 @@ export class CDataModelingStack extends JSONObject {
     return `arn:${partition}:dynamodb:${awsRegion}:${awsAccountId}:table/${analyticsMetadataTable}`;
   })
   @supportVersions([SolutionVersion.V_1_1_0, SolutionVersion.ANY])
-    ClickstreamAnalyticsMetadataDdbArn?: string;
+  ClickstreamAnalyticsMetadataDdbArn?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (_stack :CDataModelingStack, _key:string, _value:any) => {
@@ -1251,7 +1251,7 @@ export class CDataModelingStack extends JSONObject {
     return `arn:${partition}:dynamodb:${awsRegion}:${awsAccountId}:table/${clickStreamTableName}`;
   })
   @supportVersions([SolutionVersion.V_1_1_0, SolutionVersion.ANY])
-    ClickstreamMetadataDdbArn?: string;
+  ClickstreamMetadataDdbArn?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack :CDataModelingStack, _key:string, _value:any) => {
@@ -1262,7 +1262,7 @@ export class CDataModelingStack extends JSONObject {
     return JSON.stringify(tz);
   })
   @supportVersions([SolutionVersion.V_1_1_6, SolutionVersion.ANY])
-    TimeZoneWithAppId?: string;
+  TimeZoneWithAppId?: string;
 
   @JSONObject.optional(24)
   @JSONObject.gt(0)
@@ -1270,20 +1270,20 @@ export class CDataModelingStack extends JSONObject {
     return stack._pipeline?.dataProcessing?.dataFreshnessInHour ?? 24;
   })
   @supportVersions([SolutionVersion.V_1_1_6, SolutionVersion.ANY])
-    DataFreshnessInHour?: number;
+  DataFreshnessInHour?: number;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack:CDataModelingStack, _key:string, _value:string) => {
     return getAppRegistryApplicationArn(stack._pipeline);
   })
   @supportVersions([SolutionVersion.V_1_1_0, SolutionVersion.ANY])
-    AppRegistryApplicationArn?: string;
+  AppRegistryApplicationArn?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (_stack:CDataModelingStack, _key:string, _value:string) => {
     return getIamRoleBoundaryArn();
   })
-    IamRoleBoundaryArn?: string;
+  IamRoleBoundaryArn?: string;
 
   constructor(pipeline: IPipeline, resources: CPipelineResources) {
     if (pipeline.dataModeling?.redshift?.provisioned) {
@@ -1326,10 +1326,10 @@ export class CReportingStack extends JSONObject {
   }
 
   @JSONObject.required
-    _pipeline?: IPipeline;
+  _pipeline?: IPipeline;
 
   @JSONObject.required
-    _resources?: CPipelineResources;
+  _resources?: CPipelineResources;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack:CReportingStack, key:string, _value:any) => {
@@ -1337,7 +1337,7 @@ export class CReportingStack extends JSONObject {
     validatePattern(key, QUICKSIGHT_USER_NAME_PATTERN, defaultValue);
     return defaultValue;
   })
-    QuickSightUserParam?: string;
+  QuickSightUserParam?: string;
 
   @JSONObject.optional('default')
   @JSONObject.custom( (stack:CReportingStack, key:string, _value:any) => {
@@ -1345,33 +1345,33 @@ export class CReportingStack extends JSONObject {
     validatePattern(key, QUICKSIGHT_NAMESPACE_PATTERN, defaultValue);
     return defaultValue;
   })
-    QuickSightNamespaceParam?: string;
+  QuickSightNamespaceParam?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack:CReportingStack, _key:string, _value:any) => {
     return stack._resources?.quickSightUser?.publishUserArn ?? '';
   })
   @supportVersions([SolutionVersion.ANY, SolutionVersion.V_1_1_5])
-    QuickSightPrincipalParam?: string;
+  QuickSightPrincipalParam?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack:CReportingStack, _key:string, _value:any) => {
     return stack._resources?.quickSightUser?.exploreUserArn ?? '';
   })
   @supportVersions([SolutionVersion.V_1_1_0, SolutionVersion.ANY])
-    QuickSightOwnerPrincipalParam?: string;
+  QuickSightOwnerPrincipalParam?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack:CReportingStack, _key:string, _value:any) => {
     return stack._pipeline?.projectId ?? '';
   })
-    RedshiftDBParam?: string;
+  RedshiftDBParam?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack:CReportingStack, _key:string, _value:any) => {
     return stack._resources?.appIds?.join(',');
   })
-    RedShiftDBSchemaParam?: string;
+  RedShiftDBSchemaParam?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack :CReportingStack, _key:string, value:any) => {
@@ -1386,7 +1386,7 @@ export class CReportingStack extends JSONObject {
     }
     return value;
   })
-    RedshiftEndpointParam?: string;
+  RedshiftEndpointParam?: string;
 
   @JSONObject.optional('5439')
   @JSONObject.custom( (stack :CReportingStack, _key:string, value:any) => {
@@ -1401,7 +1401,7 @@ export class CReportingStack extends JSONObject {
     }
     return value;
   })
-    RedshiftPortParam?: string;
+  RedshiftPortParam?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack:CReportingStack, key:string, _value:any) => {
@@ -1409,7 +1409,7 @@ export class CReportingStack extends JSONObject {
     validatePattern(key, SUBNETS_PATTERN, defaultValue);
     return defaultValue;
   })
-    QuickSightVpcConnectionSubnetParam?: string;
+  QuickSightVpcConnectionSubnetParam?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack :CReportingStack, _key:string, value:any) => {
@@ -1420,7 +1420,7 @@ export class CReportingStack extends JSONObject {
     }
     return value;
   })
-    QuickSightVpcConnectionSGParam?: string;
+  QuickSightVpcConnectionSGParam?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack:CReportingStack, _key:string, _value:any) => {
@@ -1433,7 +1433,7 @@ export class CReportingStack extends JSONObject {
       OUTPUT_DATA_MODELING_REDSHIFT_BI_USER_CREDENTIAL_PARAMETER_SUFFIX,
     );;
   })
-    RedshiftParameterKeyParam?: string;
+  RedshiftParameterKeyParam?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack:CReportingStack, _key:string, _value:any) => {
@@ -1447,7 +1447,7 @@ export class CReportingStack extends JSONObject {
     );;
   })
   @supportVersions([SolutionVersion.V_1_1_6, SolutionVersion.ANY])
-    RedshiftIAMRoleParam?: string;
+  RedshiftIAMRoleParam?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack :CReportingStack, _key:string, _value:any) => {
@@ -1458,27 +1458,27 @@ export class CReportingStack extends JSONObject {
     return JSON.stringify(tz);
   })
   @supportVersions([SolutionVersion.V_1_1_6, SolutionVersion.ANY])
-    QuickSightTimezoneParam?: string;
+  QuickSightTimezoneParam?: string;
 
   @JSONObject.optional('dev')
   @JSONObject.custom( (stack:CReportingStack, _key:string, _value:any) => {
     return stack._pipeline?.projectId ?? 'dev';
   })
   @supportVersions([SolutionVersion.V_1_1_6, SolutionVersion.ANY])
-    RedshiftDefaultDBParam?: string;
+  RedshiftDefaultDBParam?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (stack:CReportingStack, _key:string, _value:string) => {
     return getAppRegistryApplicationArn(stack._pipeline);
   })
   @supportVersions([SolutionVersion.V_1_1_0, SolutionVersion.ANY])
-    AppRegistryApplicationArn?: string;
+  AppRegistryApplicationArn?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (_stack:CReportingStack, _key:string, _value:string) => {
     return getIamRoleBoundaryArn();
   })
-    IamRoleBoundaryArn?: string;
+  IamRoleBoundaryArn?: string;
 
   constructor(pipeline: IPipeline, resources: CPipelineResources) {
     if (!pipeline.dataModeling) {
@@ -1500,17 +1500,17 @@ export class CAthenaStack extends JSONObject {
   }
 
   @JSONObject.required
-    AthenaDatabase?: string;
+  AthenaDatabase?: string;
 
   @JSONObject.required
-    AthenaEventTable?: string;
+  AthenaEventTable?: string;
 
   @JSONObject.optional('')
   @supportVersions([SolutionVersion.V_1_1_0, SolutionVersion.ANY])
-    AppRegistryApplicationArn?: string;
+  AppRegistryApplicationArn?: string;
 
   @JSONObject.optional(undefined)
-    IamRoleBoundaryArn?: string;
+  IamRoleBoundaryArn?: string;
 
   constructor(pipeline: IPipeline) {
     super({
@@ -1541,7 +1541,7 @@ export class CMetricsStack extends JSONObject {
   }
 
   @JSONObject.required
-    ProjectId?: string;
+  ProjectId?: string;
 
   @JSONObject.optional('')
   @JSONObject.custom( (_:any, key:string, value:any) => {
@@ -1550,24 +1550,24 @@ export class CMetricsStack extends JSONObject {
     }
     return value;
   })
-    Emails?: string;
+  Emails?: string;
 
   @JSONObject.optional(4)
   @JSONObject.gte(1)
-    ColumnNumber?: number;
+  ColumnNumber?: number;
 
   @JSONObject.optional(MetricsLegendPosition.BOTTOM)
-    LegendPosition?: MetricsLegendPosition;
+  LegendPosition?: MetricsLegendPosition;
 
   @JSONObject.optional('1')
-    Version?: string;
+  Version?: string;
 
   @JSONObject.optional('')
   @supportVersions([SolutionVersion.V_1_1_0, SolutionVersion.ANY])
-    AppRegistryApplicationArn?: string;
+  AppRegistryApplicationArn?: string;
 
   @JSONObject.optional(undefined)
-    IamRoleBoundaryArn?: string;
+  IamRoleBoundaryArn?: string;
 
   constructor(pipeline: IPipeline, resources: CPipelineResources) {
     const projectEmails = resources.project?.emails?.split(',');
@@ -1587,7 +1587,7 @@ export class CMetricsStack extends JSONObject {
 
 export class CAppRegistryStack extends JSONObject {
   @JSONObject.required
-    ProjectId?: string;
+  ProjectId?: string;
 
   constructor(pipeline: IPipeline) {
     super({

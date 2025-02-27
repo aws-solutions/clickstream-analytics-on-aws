@@ -23,12 +23,12 @@ import { Queue, QueueEncryption } from 'aws-cdk-lib/aws-sqs';
 import { StateMachine } from 'aws-cdk-lib/aws-stepfunctions';
 import { Construct } from 'constructs';
 import { LambdaFunctionNetworkProps } from './click-stream-api';
-import { CFN_RULE_PREFIX, CFN_TOPIC_PREFIX } from './lambda/api/common/constants';
 import { addCfnNagSuppressRules, rulesToSuppressForLambdaVPCAndReservedConcurrentExecutions } from '../../common/cfn-nag';
 import { createLambdaRole } from '../../common/lambda';
 import { createDLQueue } from '../../common/sqs';
 import { getShortIdOfStack } from '../../common/stack';
 import { SolutionNodejsFunction } from '../../private/function';
+import { CFN_RULE_PREFIX, CFN_TOPIC_PREFIX } from './lambda/api/common/constants';
 
 export interface BackendEventBusProps {
   readonly clickStreamTable: Table;

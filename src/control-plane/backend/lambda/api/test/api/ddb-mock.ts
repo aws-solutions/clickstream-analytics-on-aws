@@ -97,7 +97,7 @@ function userMock(ddbMock: any, userId: string, roles: IUserRole[], existed?: bo
 
 function tokenMock(ddbMock: AwsClientStub<DynamoDBDocumentClient>, existed: boolean): any {
   if (existed) {
-    return ddbMock.on(PutCommand).callsFakeOnce(input => {
+    return ddbMock.on(PutCommand).callsFakeOnce((input: any) => {
       if (
         input.TableName === clickStreamTableName &&
         input.Item.id === MOCK_TOKEN &&
@@ -113,7 +113,7 @@ function tokenMock(ddbMock: AwsClientStub<DynamoDBDocumentClient>, existed: bool
       }
     });
   }
-  return ddbMock.on(PutCommand).callsFakeOnce(input => {
+  return ddbMock.on(PutCommand).callsFakeOnce((input: any) => {
     if (
       input.TableName === clickStreamTableName &&
       input.Item.id === MOCK_TOKEN &&
@@ -155,7 +155,7 @@ function quickSightUserMock(ddbMock: AwsClientStub<DynamoDBDocumentClient>, inGC
 }
 
 function tokenMockTwice(ddbMock: AwsClientStub<DynamoDBDocumentClient>): any {
-  return ddbMock.on(PutCommand).callsFakeOnce(input => {
+  return ddbMock.on(PutCommand).callsFakeOnce((input:any) => {
     if (
       input.TableName === clickStreamTableName &&
       input.Item.id === MOCK_TOKEN &&
@@ -166,7 +166,7 @@ function tokenMockTwice(ddbMock: AwsClientStub<DynamoDBDocumentClient>): any {
     } else {
       throw new Error('mocked token id rejection');
     }
-  }).callsFake(input => {
+  }).callsFake((input: any)=> {
     if (
       input.TableName === clickStreamTableName &&
       input.Item.id === MOCK_TOKEN &&

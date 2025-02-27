@@ -66,7 +66,7 @@
           "exec": "mkdir -p dist/js"
         },
         {
-          "exec": "mv $(pnpm pack) dist/js/"
+          "exec": "pnpm pack --pack-destination dist/js"
         }
       ]
     },
@@ -109,13 +109,13 @@
       },
       "steps": [
         {
-          "exec": "pnpm dlx npm-check-updates@16 --upgrade --target=minor --peer --dep=dev,peer,prod,optional --filter=@types/jest,jest,projen,ts-jest,typescript,@aws-sdk/types,@smithy/node-http-handler"
+          "exec": "pnpm dlx npm-check-updates@16 --upgrade --target=minor --peer --no-deprecated --dep=dev,peer,prod,optional --filter=@types/jest,@types/node,jest,ts-jest,typescript,@aws-sdk/types,@smithy/node-http-handler"
         },
         {
           "exec": "pnpm i --no-frozen-lockfile"
         },
         {
-          "exec": "pnpm update @types/jest @types/jsonwebtoken @types/node-fetch @types/node constructs jest jest-junit projen ts-jest typescript @aws-lambda-powertools/logger @aws-sdk/types @smithy/node-http-handler hpagent jsonwebtoken jwks-rsa mustache node-cache node-fetch"
+          "exec": "pnpm update @types/jest @types/jsonwebtoken @types/node @types/node-fetch jest jest-junit ts-jest typescript @aws-lambda-powertools/logger @aws-sdk/types @smithy/node-http-handler hpagent jsonwebtoken jwks-rsa mustache node-cache node-fetch"
         },
         {
           "exec": "pnpm dlx projen"
