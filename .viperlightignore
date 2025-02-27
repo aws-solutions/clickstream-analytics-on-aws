@@ -15,6 +15,16 @@ examples/*
 frontend/build/*
 src/base-lib/lib/*
 
+# v1.1.9 changes
+.*
+test/functional_tests/clickstream_sample_data_tool/util/util.py:73
+test/functional_tests/cases/config.yml
+.nightswatch/scripts/default-taskcat-s3.yml
+.nightswatch/scripts/default-taskcat-vpc.yml
+test/functional_tests/API/api_config.json
+test/functional_tests/cases/config.yml
+Config
+
 # git source and ALB service accounts in docs
 docs/mkdocs.base.yml:35
 docs/en/pipeline-mgmt/ingestion/configure-ingestion-endpoint.md

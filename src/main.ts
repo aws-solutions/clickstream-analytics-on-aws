@@ -85,6 +85,7 @@ if (!(/true/i).test(app.node.tryGetContext('ignoreWebConsoleSynth'))) {
     { id: 'AwsSolutions-IAM5', reason: 'Cause by CDK BucketDeployment construct (aws-cdk-lib/aws-s3-deployment)' },
     { id: 'AwsSolutions-APIG2', reason: 'The REST API input validation in Lambda(Express) code, the front ApiGateway does not need repeated validation.' },
     { id: 'AwsSolutions-COG4', reason: 'The REST API validate input via OIDC authorizer, there is no need to use Cognito user pool authorizer.' },
+    { id: 'AwsSolutions-CFR7', reason: 'The Cloudfront distribution uses an origin access control for the S3 origin.' },
   ];
 
   stackSuppressions([

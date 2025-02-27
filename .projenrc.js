@@ -17,7 +17,7 @@ const PnpmWorkspace = require('./projenrc/pnpm');
 const version = '1.1.9';
 const cdkVersion = '2.81.0';
 const minNodeVersion = '20.12.0';
-const pnpmVersion = '8.15.3';
+const pnpmVersion = '9.15.3';
 
 const cdkAlphaModules = [
   '@aws-cdk/aws-glue-alpha',
@@ -32,15 +32,15 @@ const commonDeps = [
   'cron-parser@^4.8.1',
   'moment-timezone@^0.5.45',
   'node-fetch@^2.6.4',
-  'jsonpath-plus@^10.0.0',
+  'jsonpath-plus@^10.2.0',
   'csv-parser@^3.0.0',
 ];
 
 const commonDevDeps = [
   '@types/aws-lambda@^8.10.110',
   '@types/uuid@^9.0.0',
-  'aws-sdk-client-mock@^3.0.1',
-  'aws-sdk-client-mock-jest@^3.0.1',
+  'aws-sdk-client-mock@3.0.1',
+  'aws-sdk-client-mock-jest@3.0.1',
   '@types/mustache@^4.2.2',
   'mock-fs@^5.2.0',
   '@types/mock-fs@^4.13.1',
@@ -59,7 +59,7 @@ const awsSDKPackagesVersion = '3.523.0';
 const awsSDKPackagesDeps = [
   '@aws-sdk/types',
   '@aws-sdk/credential-providers',
-].map(dep => `${dep}@^${awsSDKPackagesVersion}`);
+].map(dep => `${dep}@${awsSDKPackagesVersion}`);
 const awsSDKServicesVersion = '3.523.0';
 const awsSDKServicesDeps = [
   '@aws-sdk/client-kafkaconnect',
@@ -79,11 +79,11 @@ const awsSDKServicesDeps = [
   '@aws-sdk/client-emr-serverless',
   '@aws-sdk/client-sfn',
   '@aws-sdk/client-kinesis',
-].map(dep => `${dep}@^${awsSDKServicesVersion}`);
+].map(dep => `${dep}@${awsSDKServicesVersion}`);
 
 const awsSDKPackagesDepsForApiProject = [
   '@aws-sdk/util-dynamodb',
-].map(dep => `${dep}@^${awsSDKPackagesVersion}`);
+].map(dep => `${dep}@${awsSDKPackagesVersion}`);
 const awsSDKServicesDepsForApiProject = [
   '@aws-sdk/client-ec2',
   '@aws-sdk/client-s3',
@@ -106,12 +106,12 @@ const awsSDKServicesDepsForApiProject = [
   '@aws-sdk/client-eventbridge',
   '@aws-sdk/lib-dynamodb',
   '@aws-sdk/s3-request-presigner',
-].map(dep => `${dep}@^${awsSDKServicesVersion}`);
+].map(dep => `${dep}@${awsSDKServicesVersion}`);
 
 const depsForFrontendProject = [
-  '@aws-sdk/client-s3@^3.353.0',
-  '@aws-sdk/lib-storage@^3.353.0',
-  '@aws-sdk/xhr-http-handler@^3.353.0',
+  '@aws-sdk/client-s3@3.353.0',
+  '@aws-sdk/lib-storage@3.353.0',
+  '@aws-sdk/xhr-http-handler@3.353.0',
   '@babel/core@^7.24.0',
   '@cloudscape-design/components@^3.0.570',
   '@cloudscape-design/design-tokens@^3.0.34',
@@ -192,10 +192,11 @@ const devDepsForFrontendProject = [
   'webpack-manifest-plugin@^4.0.2',
   'workbox-webpack-plugin@^6.4.1',
   '@babel/plugin-proposal-private-property-in-object@^7.21.11',
+  '@babel/plugin-transform-class-static-block@^7.24.1',
   '@types/lodash@^4.14.191',
   '@types/uuid@^9.0.0',
   '@typescript-eslint/eslint-plugin@^5.42.0',
-  'esbuild@^0.17.12',
+  'esbuild@^0.25.0',
   'esbuild-plugin-inline-image@^0.0.9',
   'esbuild-plugin-sass@^1.0.1',
   'eslint@^8.26.0',
@@ -370,6 +371,10 @@ project.package.addField('resolutions', {
   'nth-check': '^2.1.1',
   'follow-redirects': '^1.15.6',
   'semver': '^7.5.2',
+  'aws-cdk-lib': '2.140.0',
+  'constructs': '10.3.0',
+  'esbuild': '^0.25.0',
+  'elliptic': '^6.6.1',
 });
 
 const baseProject = new typescript.TypeScriptProject({
@@ -795,7 +800,7 @@ gitlabMain.createNestedTemplates({
           'cd $CI_PROJECT_DIR/frontend',
         ],
         script: [
-          'npm install -g pnpm@8.15.3',
+          'npm install -g pnpm@9.15.3',
           'pnpm install',
           'pnpm run build',
           'pnpm run test',
@@ -1081,7 +1086,7 @@ gitlabMain.createNestedTemplates({
           },
         ],
         script: [
-          'npm install -g pnpm@8.15.3',
+          'npm install -g pnpm@9.15.3',
           'pnpm install',
           'pnpm projen',
           'pnpm projen eslint',

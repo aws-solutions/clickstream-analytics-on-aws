@@ -28,13 +28,13 @@ import { RetentionDays } from 'aws-cdk-lib/aws-logs';
 import { Bucket, IBucket } from 'aws-cdk-lib/aws-s3';
 import { Provider } from 'aws-cdk-lib/custom-resources';
 import { Construct } from 'constructs';
-import { GetResourcePrefixPropertiesType } from './lambdas/custom-resource/get-source-prefix';
 import { addCfnNagSuppressRules, rulesToSuppressForLambdaVPCAndReservedConcurrentExecutions } from '../common/cfn-nag';
 import { createLambdaRole } from '../common/lambda';
 import { REDSHIFT_MODE } from '../common/model';
 import { Parameters, SubnetParameterType } from '../common/parameters';
 import { getExistVpc } from '../common/vpc-utils';
 import { SolutionNodejsFunction } from '../private/function';
+import { GetResourcePrefixPropertiesType } from './lambdas/custom-resource/get-source-prefix';
 
 export interface RedshiftAnalyticsStackProps {
   network: {

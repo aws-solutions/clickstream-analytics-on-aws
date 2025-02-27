@@ -6,6 +6,11 @@
       "type": "build"
     },
     {
+      "name": "@babel/plugin-transform-class-static-block",
+      "version": "^7.24.1",
+      "type": "build"
+    },
+    {
       "name": "@testing-library/jest-dom",
       "version": "^5.16.5",
       "type": "build"
@@ -31,7 +36,7 @@
     },
     {
       "name": "@types/node",
-      "version": "^20",
+      "version": "^18.17.0",
       "type": "build"
     },
     {
@@ -100,11 +105,6 @@
       "type": "build"
     },
     {
-      "name": "constructs",
-      "version": "^10.0.0",
-      "type": "build"
-    },
-    {
       "name": "crypto-browserify",
       "version": "^3.12.0",
       "type": "build"
@@ -121,7 +121,7 @@
     },
     {
       "name": "esbuild",
-      "version": "^0.17.12",
+      "version": "^0.25.0",
       "type": "build"
     },
     {
@@ -180,7 +180,7 @@
     },
     {
       "name": "jest-junit",
-      "version": "^15",
+      "version": "^16",
       "type": "build"
     },
     {
@@ -206,10 +206,6 @@
     {
       "name": "process",
       "version": "^0.11.10",
-      "type": "build"
-    },
-    {
-      "name": "projen",
       "type": "build"
     },
     {
@@ -257,17 +253,17 @@
     },
     {
       "name": "@aws-sdk/client-s3",
-      "version": "^3.353.0",
+      "version": "3.353.0",
       "type": "runtime"
     },
     {
       "name": "@aws-sdk/lib-storage",
-      "version": "^3.353.0",
+      "version": "3.353.0",
       "type": "runtime"
     },
     {
       "name": "@aws-sdk/xhr-http-handler",
-      "version": "^3.353.0",
+      "version": "3.353.0",
       "type": "runtime"
     },
     {
