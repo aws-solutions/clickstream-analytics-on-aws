@@ -32,7 +32,7 @@ const commonDeps = [
   'cron-parser@^4.8.1',
   'moment-timezone@^0.5.45',
   'node-fetch@^2.6.4',
-  'jsonpath-plus@^10.2.0',
+  'jsonpath-plus@^10.3.0',
   'csv-parser@^3.0.0',
 ];
 

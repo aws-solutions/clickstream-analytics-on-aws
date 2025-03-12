@@ -84,7 +84,7 @@
     "i18next": "^22.4.6",
     "i18next-fs-backend": "^2.2.0",
     "json-difference": "^1.9.1",
-    "jsonpath-plus": "^10.2.0",
+    "jsonpath-plus": "^10.3.0",
     "jsonwebtoken": "^9.0.0",
     "jwks-rsa": "^3.0.1",
     "moment-timezone": "^0.5.45",
