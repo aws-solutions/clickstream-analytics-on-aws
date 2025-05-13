@@ -20,7 +20,7 @@ import { paginateData } from '../common/utils';
 import { CPipeline } from '../model/pipeline';
 import { ListCertificates } from '../store/aws/acm';
 import { pingServiceResource } from '../store/aws/cloudformation';
-import { describeAlarmsByProjectId, disableAlarms, enableAlarms } from '../store/aws/cloudwatch';
+import { describeAlarmsByProjectId } from '../store/aws/cloudwatch';
 import { describeVpcs, listRegions, describeSubnetsWithType, describeVpcs3AZ, describeVpcSecurityGroups } from '../store/aws/ec2';
 import { listRoles } from '../store/aws/iam';
 import { listMSKCluster } from '../store/aws/kafka';
@@ -255,32 +255,6 @@ export class EnvironmentServ {
         totalCount: result.length,
         items: paginateData(result, true, pageSize, pageNumber),
       }));
-    } catch (error) {
-      next(error);
-    }
-  }
-
-  public async alarmsDisable(req: any, res: any, next: any) {
-    try {
-      const {
-        region,
-        alarmNames,
-      } = req.body;
-      const result = await disableAlarms(region, alarmNames);
-      return res.json(new ApiSuccess(result));
-    } catch (error) {
-      next(error);
-    }
-  }
-
-  public async alarmsEnable(req: any, res: any, next: any) {
-    try {
-      const {
-        region,
-        alarmNames,
-      } = req.body;
-      const result = await enableAlarms(region, alarmNames);
-      return res.json(new ApiSuccess(result));
     } catch (error) {
       next(error);
     }

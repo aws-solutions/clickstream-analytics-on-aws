@@ -481,8 +481,6 @@ export class ClickStreamApiConstruct extends Construct {
           'secretsmanager:ListSecrets',
           'secretsmanager:GetSecretValue',
           'cloudwatch:DescribeAlarms',
-          'cloudwatch:EnableAlarmActions',
-          'cloudwatch:DisableAlarmActions',
           'events:PutRule',
           'events:ListTargetsByRule',
           'events:PutTargets',

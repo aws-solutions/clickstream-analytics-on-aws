@@ -180,8 +180,6 @@
     "upgrade": "Upgrade",
     "confirm": "Confirm",
     "addPlugin": "Add Plugin",
-    "enableAll": "Enable All",
-    "disableAll": "Disable All",
     "viewAlarms": "View Alarms",
     "refreshMetadata": "Refresh Metadata",
     "clearFilters": "Clear filters",

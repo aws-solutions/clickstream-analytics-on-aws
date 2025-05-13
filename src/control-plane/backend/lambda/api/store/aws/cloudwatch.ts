@@ -15,8 +15,6 @@ import { ALARM_NAME_PREFIX, aws_sdk_client_common_config } from '@aws/clickstrea
 import {
   CloudWatchClient,
   paginateDescribeAlarms,
-  DisableAlarmActionsCommand,
-  EnableAlarmActionsCommand,
   MetricAlarm,
 } from '@aws-sdk/client-cloudwatch';
 
@@ -33,26 +31,4 @@ export const describeAlarmsByProjectId = async (region: string, projectId: strin
     records.push(...page.MetricAlarms as MetricAlarm[]);
   }
   return records;
-};
-
-export const disableAlarms = async (region: string, alarmNames: string[]) => {
-  const cloudWatchClient = new CloudWatchClient({
-    ...aws_sdk_client_common_config,
-    region,
-  });
-  const command = new DisableAlarmActionsCommand({
-    AlarmNames: alarmNames,
-  });
-  await cloudWatchClient.send(command);
-};
-
-export const enableAlarms = async (region: string, alarmNames: string[]) => {
-  const cloudWatchClient = new CloudWatchClient({
-    ...aws_sdk_client_common_config,
-    region,
-  });
-  const command = new EnableAlarmActionsCommand({
-    AlarmNames: alarmNames,
-  });
-  await cloudWatchClient.send(command);
 };

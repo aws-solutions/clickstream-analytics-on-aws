@@ -22,7 +22,7 @@ import {
   StatusIndicatorProps,
   Table,
 } from '@cloudscape-design/components';
-import { disableAlarms, enableAlarms, getAlarmList } from 'apis/resource';
+import {getAlarmList } from 'apis/resource';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { buildAlarmsLink } from 'ts/url';
@@ -49,8 +49,6 @@ const AlarmTable: React.FC<AlarmTableProps> = (props: AlarmTableProps) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalCount, setTotalCount] = useState(0);
   const [alarmList, setAlarmList] = useState<IAlarm[]>([]);
-  const [loadingEnable, setLoadingEnable] = useState(false);
-  const [loadingDisable, setLoadingDisable] = useState(false);
 
   const listAlarms = async () => {
     setLoadingData(true);
@@ -68,46 +66,6 @@ const AlarmTable: React.FC<AlarmTableProps> = (props: AlarmTableProps) => {
       }
     } catch (error) {
       setLoadingData(false);
-    }
-  };
-
-  const enableAlarm = async (item?: IAlarm) => {
-    setLoadingEnable(true);
-    try {
-      const alarmNames = item
-        ? [item?.AlarmName]
-        : selectedItems.map((item) => item.AlarmName);
-      const resData: ApiResponse<null> = await enableAlarms({
-        region,
-        alarmNames,
-      });
-      if (resData.success) {
-        setSelectedItems([]);
-        listAlarms();
-        setLoadingEnable(false);
-      }
-    } catch (error) {
-      setLoadingEnable(false);
-    }
-  };
-
-  const disableAlarm = async (item?: IAlarm) => {
-    setLoadingDisable(true);
-    try {
-      const alarmNames = item
-        ? [item?.AlarmName]
-        : selectedItems.map((item) => item.AlarmName);
-      const resData: ApiResponse<null> = await disableAlarms({
-        region,
-        alarmNames,
-      });
-      if (resData.success) {
-        setSelectedItems([]);
-        listAlarms();
-        setLoadingDisable(false);
-      }
-    } catch (error) {
-      setLoadingDisable(false);
     }
   };
 
@@ -234,24 +192,6 @@ const AlarmTable: React.FC<AlarmTableProps> = (props: AlarmTableProps) => {
                       listAlarms();
                     }}
                   />
-                  <Button
-                    loading={loadingEnable}
-                    disabled={selectedItems.length <= 0}
-                    onClick={() => {
-                      enableAlarm();
-                    }}
-                  >
-                    {t('button.enableAll')}
-                  </Button>
-                  <Button
-                    loading={loadingDisable}
-                    disabled={selectedItems.length <= 0}
-                    onClick={() => {
-                      disableAlarm();
-                    }}
-                  >
-                    {t('button.disableAll')}
-                  </Button>
                   <Button
                     href={buildAlarmsLink(region, projectId)}
                     iconAlign="right"
