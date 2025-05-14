@@ -131,27 +131,6 @@ const getAlarmList = async (params: {
   return result;
 };
 
-const disableAlarms = async (data: {
-  region: string;
-  alarmNames: string[];
-}) => {
-  const result: any = await apiRequest(
-    'post',
-    `/env/cloudwatch/alarms/disable`,
-    data
-  );
-  return result;
-};
-
-const enableAlarms = async (data: { region: string; alarmNames: string[] }) => {
-  const result: any = await apiRequest(
-    'post',
-    `/env/cloudwatch/alarms/enable`,
-    data
-  );
-  return result;
-};
-
 const checkServicesAvailable = async (params: { region: string }) => {
   const result: any = await apiRequest(
     'get',
@@ -182,7 +161,5 @@ export {
   getVPCList,
   getSTSUploadRole,
   getAlarmList,
-  disableAlarms,
-  enableAlarms,
   checkServicesAvailable,
 };

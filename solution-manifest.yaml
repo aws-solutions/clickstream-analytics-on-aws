@@ -1,7 +1,7 @@
 ---
 id: SO0219
 name: clickstream-analytics-on-aws
-version: v1.1.11
+version: v1.1.12
 cloudformation_templates:
   - template: cloudfront-s3-control-plane-stack-global.template.json
     main_template: true

@@ -16,7 +16,6 @@ import { CloudFormationClient, DescribeTypeCommand } from '@aws-sdk/client-cloud
 import {
   CloudWatchClient,
   DescribeAlarmsCommand,
-  DisableAlarmActionsCommand, EnableAlarmActionsCommand,
 } from '@aws-sdk/client-cloudwatch';
 import {
   EC2Client,
@@ -1610,40 +1609,6 @@ describe('Account Env test', () => {
       },
     });
 
-  });
-  it('Disable alarms', async () => {
-    cloudWatchClient.on(DisableAlarmActionsCommand).resolves({});
-    projectExistedMock(ddbMock, true);
-    const res = await request(app)
-      .post('/api/env/cloudwatch/alarms/disable')
-      .set('X-Click-Stream-Request-Id', MOCK_TOKEN)
-      .send({
-        region: 'us-east-1',
-        alarmNames: [],
-      });
-    expect(res.headers['content-type']).toEqual('application/json; charset=utf-8');
-    expect(res.statusCode).toBe(200);
-    expect(res.body).toEqual({
-      success: true,
-      message: '',
-    });
-  });
-  it('Enable alarms', async () => {
-    cloudWatchClient.on(EnableAlarmActionsCommand).resolves({});
-    projectExistedMock(ddbMock, true);
-    const res = await request(app)
-      .post('/api/env/cloudwatch/alarms/enable')
-      .set('X-Click-Stream-Request-Id', MOCK_TOKEN)
-      .send({
-        region: 'us-east-1',
-        alarmNames: [],
-      });
-    expect(res.headers['content-type']).toEqual('application/json; charset=utf-8');
-    expect(res.statusCode).toBe(200);
-    expect(res.body).toEqual({
-      success: true,
-      message: '',
-    });
   });
 
   afterAll((done) => {

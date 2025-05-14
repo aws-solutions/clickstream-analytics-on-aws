@@ -12,7 +12,7 @@
  */
 
 import express from 'express';
-import { body, header, query } from 'express-validator';
+import { header, query } from 'express-validator';
 import { defaultAssumeRoleTypeValid, defaultPageValueValid, defaultRegionValueValid, defaultSubnetTypeValid, isRequestIdExisted, isValidEmpty, validate } from '../common/request-valid';
 import { EnvironmentServ } from '../service/environment';
 
@@ -218,24 +218,6 @@ router_env.get(
   ]),
   async (req: express.Request, res: express.Response, next: express.NextFunction) => {
     return environmentServ.alarms(req, res, next);
-  });
-
-router_env.post(
-  '/cloudwatch/alarms/disable',
-  validate([
-    body('region').custom(isValidEmpty),
-  ]),
-  async (req: express.Request, res: express.Response, next: express.NextFunction) => {
-    return environmentServ.alarmsDisable(req, res, next);
-  });
-
-router_env.post(
-  '/cloudwatch/alarms/enable',
-  validate([
-    body('region').custom(isValidEmpty),
-  ]),
-  async (req: express.Request, res: express.Response, next: express.NextFunction) => {
-    return environmentServ.alarmsEnable(req, res, next);
   });
 
 router_env.get(

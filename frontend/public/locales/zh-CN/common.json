@@ -180,8 +180,6 @@
     "upgrade": "升级",
     "confirm": "确认",
     "addPlugin": "添加插件",
-    "enableAll": "全部启用",
-    "disableAll": "全部禁用",
     "viewAlarms": "查看告警",
     "refreshMetadata": "刷新元数据",
     "clearFilters": "清理筛选",
