@@ -22,7 +22,7 @@ We use **Swift Package Manager(SPM)** to distribute Clickstream Swift SDK, open 
 
 1. Copy the Clickstream Swift SDK GitHub repository URL and paste it into the search bar.
     ```bash
-    https://github.com/awslabs/clickstream-swift
+    https://github.com/aws-solutions/clickstream-analytics-on-aws-swift-sdk
     ```
 2. Check the rules for the version of the SDK that you want Swift Package Manager to install, it is recommended to choose **Up to Next Major Version**, then click **Add Package**.
 3. Keep the Clickstream product checked as default.
@@ -783,17 +783,17 @@ You can use the above preset item attributes, of course, you can also add custom
 
 ## Change log
 
-[GitHub change log](https://github.com/awslabs/clickstream-swift/releases)
+[GitHub change log](https://github.com/aws-solutions/clickstream-analytics-on-aws-swift-sdk/releases)
 
 ## Sample project
 Sample [iOS Project](https://github.com/aws-samples/clickstream-sdk-samples/tree/main/ios) for SDK integration.
 
 ## Reference link
 
-[Source code](https://github.com/awslabs/clickstream-swift)
+[Source code](https://github.com/aws-solutions/clickstream-analytics-on-aws-swift-sdk)
 
-[Project issue](https://github.com/awslabs/clickstream-swift/issues)
+[Project issue](https://github.com/aws-solutions/clickstream-analytics-on-aws-swift-sdk/issues)
 
-[API Documentation](https://awslabs.github.io/clickstream-swift/)
+[API Documentation](https://aws-solutions.github.io/clickstream-analytics-on-aws-swift-sdk/)
 
-[ClickstreamObjc Api Reference](https://awslabs.github.io/clickstream-swift/Classes/ClickstreamObjc.html)
+[ClickstreamObjc Api Reference](https://aws-solutions.github.io/clickstream-analytics-on-aws-swift-sdk/Classes/ClickstreamObjc.html)

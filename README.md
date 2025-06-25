@@ -223,13 +223,13 @@ Upon successfully cloning the repository into your local development environment
 ├── tsconfig.json
 ```
 
-[android-sdk]: https://github.com/awslabs/clickstream-android
-[swift-sdk]: https://github.com/awslabs/clickstream-swift
-[flutter-sdk]: https://github.com/awslabs/clickstream-flutter
-[react-native-sdk]: https://github.com/awslabs/clickstream-react-native
-[web-sdk]: https://github.com/awslabs/clickstream-web
+[android-sdk]: https://github.com/aws-solutions/clickstream-analytics-on-aws-android-sdk
+[swift-sdk]: https://github.com/aws-solutions/clickstream-analytics-on-aws-swift-sdk
+[flutter-sdk]: https://github.com/aws-solutions/clickstream-analytics-on-aws-flutter-sdk
+[react-native-sdk]: https://github.com/aws-solutions/clickstream-analytics-on-aws-react-native-sdk
+[web-sdk]: https://github.com/aws-solutions/clickstream-analytics-on-aws-web-sdk
 [wechat-sdk]: https://github.com/awslabs/clickstream-wechat
-[http-api]: https://awslabs.github.io/clickstream-analytics-on-aws/en/latest/sdk-manual/http-api/
+[http-api]: https://aws-solutions.github.io/clickstream-analytics-on-aws/en/latest/sdk-manual/http-api/
 [configure-aws-cli]: https://docs.aws.amazon.com/zh_cn/cli/latest/userguide/cli-chap-configure.html
 [aws-cdk]: https://aws.amazon.com/cdk/
 [doc-arch]: https://docs.aws.amazon.com/solutions/latest/clickstream-analytics-on-aws/architecture-overview.html

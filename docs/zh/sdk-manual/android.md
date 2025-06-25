@@ -356,7 +356,7 @@ ClickstreamAnalytics.getClickStreamConfiguration()
 
 如果你想使用自定义DNS进行网络请求，你可以创建你的 `CustomOkhttpDns`并继承`okhttp3.Dns`
 ，然后配置 `.withCustomDns(CustomOkhttpDns.getInstance())`
-使其工作，您可以参考 [示例代码](https://github.com/awslabs/clickstream-android/blob/main/clickstream/src/test/java/software/aws/solution/clickstream/IntegrationTest.java#L503-L516) 。
+使其工作，您可以参考 [示例代码](https://github.com/aws-solutions/clickstream-analytics-on-aws-android-sdk/blob/main/clickstream/src/test/java/software/aws/solution/clickstream/IntegrationTest.java#L503-L516) 。
 
 ## 数据格式定义
 
@@ -609,13 +609,13 @@ Clickstream Android SDK 支持以下数据类型：
 
 ## SDK更新日志
 
-参考：[GitHub 更新日志](https://github.com/awslabs/clickstream-android/releases)
+参考：[GitHub 更新日志](https://github.com/aws-solutions/clickstream-analytics-on-aws-android-sdk/releases)
 
 ## 示例项目
 集成 SDK 的示例 [Android 项目](https://github.com/aws-samples/clickstream-sdk-samples/tree/main/android)
 
 ## 参考链接
 
-[SDK 源码](https://github.com/awslabs/clickstream-android)
+[SDK 源码](https://github.com/aws-solutions/clickstream-analytics-on-aws-android-sdk)
 
-[SDK 问题](https://github.com/awslabs/clickstream-android/issues)
+[SDK 问题](https://github.com/aws-solutions/clickstream-analytics-on-aws-android-sdk/issues)

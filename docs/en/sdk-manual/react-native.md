@@ -332,7 +332,7 @@ For iOS: Refer to [Swift SDK event attributes](./swift.md#event-attributes)
 
 ## Change log
 
-[GitHub change log](https://github.com/awslabs/clickstream-react-native/releases)
+[GitHub change log](https://github.com/aws-solutions/clickstream-analytics-on-aws-react-native-sdk/releases)
 
 React Native SDK version dependencies
 
@@ -346,6 +346,6 @@ Sample [React Native Project](https://github.com/aws-samples/clickstream-sdk-sam
 
 ## Reference link
 
-[Source code](https://github.com/awslabs/clickstream-react-native)
+[Source code](https://github.com/aws-solutions/clickstream-analytics-on-aws-react-native-sdk)
 
-[Project issue](https://github.com/awslabs/clickstream-react-native/issues)
+[Project issue](https://github.com/aws-solutions/clickstream-analytics-on-aws-react-native-sdk/issues)

@@ -354,7 +354,7 @@ ClickstreamAnalytics.getClickStreamConfiguration()
         .withCustomDns(CustomOkhttpDns.getInstance());
 ```
 
-If you want to use custom DNS for network request, you can create your `CustomOkhttpDns` which implementation `okhttp3.Dns`, then configure `.withCustomDns(CustomOkhttpDns.getInstance())` to make it works, you can refer to the [example code](https://github.com/awslabs/clickstream-android/blob/main/clickstream/src/test/java/software/aws/solution/clickstream/IntegrationTest.java#L503-L516) .
+If you want to use custom DNS for network request, you can create your `CustomOkhttpDns` which implementation `okhttp3.Dns`, then configure `.withCustomDns(CustomOkhttpDns.getInstance())` to make it works, you can refer to the [example code](https://github.com/aws-solutions/clickstream-analytics-on-aws-android-sdk/blob/main/clickstream/src/test/java/software/aws/solution/clickstream/IntegrationTest.java#L503-L516) .
 
 ## Data format definition
 
@@ -607,13 +607,13 @@ You can use the above preset item attributes, of course, you can also add custom
 
 ## Change log
 
-[GitHub change log](https://github.com/awslabs/clickstream-android/releases)
+[GitHub change log](https://github.com/aws-solutions/clickstream-analytics-on-aws-android-sdk/releases)
 
 ## Sample project
 Sample [Android Project](https://github.com/aws-samples/clickstream-sdk-samples/tree/main/android) for SDK integration.
 
 ## Reference link
 
-[Source code](https://github.com/awslabs/clickstream-android)
+[Source code](https://github.com/aws-solutions/clickstream-analytics-on-aws-android-sdk)
 
-[Project issue](https://github.com/awslabs/clickstream-android/issues)
+[Project issue](https://github.com/aws-solutions/clickstream-analytics-on-aws-android-sdk/issues)
