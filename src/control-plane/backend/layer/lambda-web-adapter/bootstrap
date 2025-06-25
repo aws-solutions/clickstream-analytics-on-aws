@@ -1,3 +1,0 @@
-#!/bin/bash
-
-exec -- "${LAMBDA_TASK_ROOT}/${_HANDLER}"

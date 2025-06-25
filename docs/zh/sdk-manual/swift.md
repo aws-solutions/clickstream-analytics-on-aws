@@ -22,7 +22,7 @@ Clickstream Swift SDK 需要 Xcode 13.4 或更高版本才能构建。
 
 1. 复制Swift SDK 的 GitHub 仓库 URL，然后粘贴到搜索栏中。
     ```bash
-    https://github.com/awslabs/clickstream-swift
+    https://github.com/aws-solutions/clickstream-analytics-on-aws-swift-sdk
     ```
 2. 检查您希望 Swift Package Manager 安装 SDK 版本的规则。推荐选择 **Up to Next Major Version**，然后点击 **Add Package** 按钮。
 3. 默认选中 Clickstream 库。
@@ -791,17 +791,17 @@ Clickstream Swift SDK 支持以下数据类型：
 
 ## SDK更新日志
 
-参考：[GitHub 更新日志](https://github.com/awslabs/clickstream-swift/releases)
+参考：[GitHub 更新日志](https://github.com/aws-solutions/clickstream-analytics-on-aws-swift-sdk/releases)
 
 ## 示例项目
 集成 SDK 的示例 [iOS 项目](https://github.com/aws-samples/clickstream-sdk-samples/tree/main/ios)
 
 ## 参考链接
 
-[SDK 源码](https://github.com/awslabs/clickstream-swift)
+[SDK 源码](https://github.com/aws-solutions/clickstream-analytics-on-aws-swift-sdk)
 
-[SDK 问题](https://github.com/awslabs/clickstream-swift/issues)
+[SDK 问题](https://github.com/aws-solutions/clickstream-analytics-on-aws-swift-sdk/issues)
 
-[API 文档](https://awslabs.github.io/clickstream-swift/)
+[API 文档](https://aws-solutions.github.io/clickstream-swift/)
 
-[Objective-C Api 文档](https://awslabs.github.io/clickstream-swift/Classes/ClickstreamObjc.html)
+[Objective-C Api 文档](https://aws-solutions.github.io/clickstream-swift/Classes/ClickstreamObjc.html)

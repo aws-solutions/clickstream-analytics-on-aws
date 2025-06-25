@@ -1,6 +1,6 @@
 site_name: Clickstream Analytics on AWS
-repo_url: !ENV [REPO_URL, 'https://github.com/awslabs/clickstream-analytics-on-aws/']
-site_url: !ENV [SITE_URL, 'https://awslabs.github.io/clickstream-analytics-on-aws/']
+repo_url: !ENV [REPO_URL, 'https://github.com/aws-solutions/clickstream-analytics-on-aws/']
+site_url: !ENV [SITE_URL, 'https://aws-solutions.github.io/clickstream-analytics-on-aws/']
 
 theme:
   name: material
@@ -62,8 +62,8 @@ extra:
   aws_cn_prefix: clickstream-analytics-on-aws
   solution: clickstream-analytics-on-aws
   solution_name: Clickstream Analytics on AWS
-  git_repo: https://github.com/awslabs/clickstream-analytics-on-aws.git
-  source_repo: https://github.com/awslabs/clickstream-analytics-on-aws
+  git_repo: https://github.com/aws-solutions/clickstream-analytics-on-aws.git
+  source_repo: https://github.com/aws-solutions/clickstream-analytics-on-aws
   analytics:
     provider: custom
     version: v0.12.1

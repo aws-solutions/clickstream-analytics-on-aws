@@ -63,8 +63,8 @@
 
 报告模块创建与数据仓库的安全连接，并在商业智能 Amazon QuickSight 中配置开箱即用的仪表板。
 
-[clickstream-swift]: https://github.com/awslabs/clickstream-swift
-[clickstream-andriod]: https://github.com/awslabs/clickstream-android
-[clickstream-web]: https://github.com/awslabs/clickstream-web
-[clickstream-flutter]: https://github.com/awslabs/clickstream-flutter
+[clickstream-swift]: https://github.com/aws-solutions/clickstream-analytics-on-aws-swift-sdk
+[clickstream-andriod]: https://github.com/aws-solutions/clickstream-analytics-on-aws-android-sdk
+[clickstream-web]: https://github.com/aws-solutions/clickstream-analytics-on-aws-web-sdk
+[clickstream-flutter]: https://github.com/aws-solutions/clickstream-analytics-on-aws-flutter-sdk
 [clickstream-wechat]: https://github.com/awslabs/clickstream-wechat

@@ -325,7 +325,7 @@ iOS: 参考 [Swift SDK 事件属性](./swift.md#_18)
 
 ## SDK 更新日志
 
-参考：[GitHub 更新日志](https://github.com/awslabs/clickstream-react-native/releases)
+参考：[GitHub 更新日志](https://github.com/aws-solutions/clickstream-analytics-on-aws-react-native-sdk/releases)
 
 原生 SDK 版本依赖关系
 
@@ -339,6 +339,6 @@ iOS: 参考 [Swift SDK 事件属性](./swift.md#_18)
 
 ## 参考链接
 
-[SDK 源码](https://github.com/awslabs/clickstream-react-native)
+[SDK 源码](https://github.com/aws-solutions/clickstream-analytics-on-aws-react-native-sdk)
 
-[SDK 问题](https://github.com/awslabs/clickstream-react-native/issues)
+[SDK 问题](https://github.com/aws-solutions/clickstream-analytics-on-aws-react-native-sdk/issues)

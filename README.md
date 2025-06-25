@@ -49,7 +49,7 @@ Follow the [implementation guide][doc-deployment] to deploy the solution using A
 - Configure [credential of aws cli][configure-aws-cli]
 - Install Node.js LTS version 20.12.0 or later
 - Install Docker Engine
-- Install pnpm `npm install -g pnpm@8.15.3`
+- Install pnpm `npm install -g pnpm@9.15.3`
 - Install the dependencies of the solution by executing the command `pnpm install && pnpm projen && pnpm nx build @aws/clickstream-base-lib`
 - Initialize the CDK toolkit stack into AWS environment (only for deploying via [AWS CDK][aws-cdk] for the first time), and run `npx cdk bootstrap`
 
@@ -223,13 +223,13 @@ Upon successfully cloning the repository into your local development environment
 ├── tsconfig.json
 ```
 
-[android-sdk]: https://github.com/awslabs/clickstream-android
-[swift-sdk]: https://github.com/awslabs/clickstream-swift
-[flutter-sdk]: https://github.com/awslabs/clickstream-flutter
-[react-native-sdk]: https://github.com/awslabs/clickstream-react-native
-[web-sdk]: https://github.com/awslabs/clickstream-web
+[android-sdk]: https://github.com/aws-solutions/clickstream-analytics-on-aws-android-sdk
+[swift-sdk]: https://github.com/aws-solutions/clickstream-analytics-on-aws-swift-sdk
+[flutter-sdk]: https://github.com/aws-solutions/clickstream-analytics-on-aws-flutter-sdk
+[react-native-sdk]: https://github.com/aws-solutions/clickstream-analytics-on-aws-react-native-sdk
+[web-sdk]: https://github.com/aws-solutions/clickstream-analytics-on-aws-web-sdk
 [wechat-sdk]: https://github.com/awslabs/clickstream-wechat
-[http-api]: https://awslabs.github.io/clickstream-analytics-on-aws/en/latest/sdk-manual/http-api/
+[http-api]: https://aws-solutions.github.io/clickstream-analytics-on-aws/en/latest/sdk-manual/http-api/
 [configure-aws-cli]: https://docs.aws.amazon.com/zh_cn/cli/latest/userguide/cli-chap-configure.html
 [aws-cdk]: https://aws.amazon.com/cdk/
 [doc-arch]: https://docs.aws.amazon.com/solutions/latest/clickstream-analytics-on-aws/architecture-overview.html

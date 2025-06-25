@@ -52,14 +52,13 @@
 您可以在解决方案控制台的 **状态** 列中查看管道的状态。 几分钟后您应该会收到`活跃`状态。
 
 ## 升级后操作
-本节提供升级后操作的说明。
 
 ### 数据摄取
-从 1.1.7 版本开始，此解决方案使用[launch templates][launch templates]。升级数据提取模块后，请完成以下步骤，将 Amazon ECS 使用的 Amazon EC2 实例替换为新的launch template配置。
+因为AWS不再在Auto Scaling组中支持Launch Configurations，我们会使用Launch Template替换。当数据摄取模块升级到v1.2.0后，请按以下操作将Amazon ECS使用的EC2实例置换成最新的Launch Template的配置：
 
-1. 通过[更新 Amazon ECS 服务][updating the Amazon ECS service]增加所需任务数量。
-2. 等新增加的 Amazon ECS 任务启动完成后，[手动停止旧的 Amazon ECS 任务][manually stop the old tasks]。
-3. 手动[终止旧版本的 EC2 实例][terminate the old Amazon EC2 instances]。
+1. 手动增加 Amazon ECS的预期任务数。
+2. 等新增加的 Amazon ECS 任务启动完成后，手动停止旧的 Amazon ECS 任务。
+3. 手动将旧版本的 EC2 实例终止。
 
 ### 数据建模模块
 
@@ -172,11 +171,7 @@
 [intranet-template]: https://{{ aws_bucket }}.s3.amazonaws.com/{{ aws_prefix }}/{{ aws_version }}/private-exist-vpc-control-plane-stack.template.json
 [intranet-cn-template]: https://{{ aws_cn_bucket }}.s3.cn-north-1.amazonaws.com.cn/{{ aws_cn_prefix }}/{{ aws_cn_version }}/private-exist-vpc-control-plane-stack.template.json
 [troubleshooting]: ./troubleshooting.md
-[v115]: https://awslabs.github.io/clickstream-analytics-on-aws/zh/1.1.5/upgrade/
+[v115]: https://aws-solutions.github.io/clickstream-analytics-on-aws/zh/1.1.5/upgrade/
 [exploration]: ./analytics/explore/index.md
 [view-schema-in-redshift]: ./faq.md#redshift-redshift-schema
 [faq-recalculate-data]: ./faq.md#_10
-[launch templates]: https://alpha.www.docs.aws.a2z.com/zh_cn/autoscaling/ec2/userguide/launch-templates.html
-[updating the Amazon ECS service]: https://alpha.www.docs.aws.a2z.com/zh_cn/AmazonECS/latest/developerguide/update-service-console-v2.html
-[manually stop the old tasks]: https://alpha.www.docs.aws.a2z.com/zh_cn/AmazonECS/latest/developerguide/standalone-task-stop.html
-[terminate the old Amazon EC2 instances]: https://alpha.www.docs.aws.a2z.com/zh_cn/AWSEC2/latest/UserGuide/terminating-instances.html

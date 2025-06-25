@@ -5,6 +5,52 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.14] - 2025-06-30
+
+### Security
+
+* Resolved exposure to a vulnerability in setuptools and cross-spawn
+
+## [1.1.13] - 2025-05-16
+    
+### Fixed
+  
+* fixed pipeline deployment with Redshift
+
+## [1.1.12] - 2025-05-13
+    
+### Security
+  
+* removed CloudWatch Alarm toggling to improve security posture
+
+## [1.1.11] - 2025-03-12
+    
+### Security
+  
+* upgrade jsonpath-plus version to 10.3 
+
+## [1.1.10] - 2025-02-27
+    
+### Security
+  
+* upgrade pnpm from v8.15.3 to v9.15.3
+
+## [1.1.9] - 2025-01-24
+    
+### Security
+  
+* Updated ingestion container base images for vector and nginx
+
+## [1.1.8] - 2024-11-20
+  
+### Added
+  
+* added solution-manifest.yaml
+  
+### Security
+  
+* updated versions of axios, browserslist, cross-spawn, esbuild, express, jsonpath-plus, html-minifier, http-proxy-middleware, setuptools, webpack
+
 ## [1.1.7] - 2024-09-20
 
 ### Updated

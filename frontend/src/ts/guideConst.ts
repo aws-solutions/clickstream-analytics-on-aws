@@ -11,7 +11,7 @@
  *  and limitations under the License.
  */
 export const CLICKSTREAM_IOS_REPO_LINK =
-  'https://github.com/awslabs/clickstream-swift';
+  'https://github.com/aws-solutions/clickstream-analytics-on-aws-swift-sdk';
 
 export const DOWNLOAD_FILENAME = 'amplifyconfiguration.json';
 export const TEMPLATE_APP_ID = '{{APP_ID}}';

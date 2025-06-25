@@ -1,7 +1,7 @@
-ARG ADAPTER_VERSION=0.8.2
+ARG ADAPTER_VERSION=0.9.1
 FROM --platform=linux/aarch64 public.ecr.aws/awsguru/aws-lambda-adapter:$ADAPTER_VERSION-aarch64 AS adapter
 
-FROM public.ecr.aws/docker/library/node:20 AS builder
+FROM public.ecr.aws/docker/library/node:22 AS builder
 RUN mkdir -p /home/node/app
 WORKDIR /home/node/app
 COPY frontend frontend
@@ -19,7 +19,7 @@ ARG CHUNK_MAX_SIZE=512000
 ARG REACT_APP_SOLUTION_VERSION
 
 RUN export GENERATE_SOURCEMAP=${GENERATE_SOURCEMAP} && export CHUNK_MIN_SIZE=${CHUNK_MIN_SIZE} && export CHUNK_MAX_SIZE=${CHUNK_MAX_SIZE}
-RUN npm install -g pnpm@8.15.3
+RUN npm install -g pnpm@9.15.3
 RUN pnpm install
 RUN pnpm projen
 RUN pnpm nx build @aws/clickstream-base-lib
