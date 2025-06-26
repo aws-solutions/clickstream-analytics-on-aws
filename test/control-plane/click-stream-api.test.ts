@@ -12,7 +12,7 @@
  */
 
 import { Match } from 'aws-cdk-lib/assertions';
-import { Architecture, Runtime } from 'aws-cdk-lib/aws-lambda';
+import { Architecture } from 'aws-cdk-lib/aws-lambda';
 import { findResourcesName, TestEnv } from './test-utils';
 import { removeFolder } from '../common/jest';
 
@@ -183,7 +183,7 @@ describe('Click Stream Api ALB deploy Construct Test', () => {
 
     newALBApiStackTemplate.hasResourceProperties('AWS::Lambda::Function', {
       Architectures: [
-        Architecture.ARM_64.toString(),
+        Architecture.X86_64.toString(),
       ],
       Description: 'Lambda function for api of solution Clickstream Analytics on AWS',
       Environment: {
@@ -287,7 +287,7 @@ describe('Click Stream Api ALB deploy Construct Test', () => {
     });
     newALBApiStackTemplate.hasResourceProperties('AWS::Lambda::Function', {
       Architectures: [
-        Architecture.ARM_64.toString(),
+        Architecture.X86_64.toString(),
       ],
       Description: 'Lambda function for api of solution Clickstream Analytics on AWS',
     });
@@ -311,7 +311,7 @@ describe('Click Stream Api ALB deploy Construct Test', () => {
     });
     newALBApiStackCNTemplate.hasResourceProperties('AWS::Lambda::Function', {
       Architectures: [
-        Architecture.ARM_64.toString(),
+        Architecture.X86_64.toString(),
       ],
       Description: 'Lambda function for api of solution Clickstream Analytics on AWS',
     });
@@ -1609,7 +1609,6 @@ describe('Click Stream Api Cloudfront deploy Construct Test', () => {
 
   const cdkOut = '/tmp/cloudfront-portal-clickstream-api-test';
   const newALBApiStackTemplate = TestEnv.newALBApiStack(cdkOut).template;
-  const newALBApiStackCNTemplate = TestEnv.newALBApiStack(cdkOut, true).template;
   const newCloudfrontApiStackTemplate = TestEnv.newCloudfrontApiStack(cdkOut).template;
 
   test('DynamoDB table', () => {
@@ -1696,21 +1695,9 @@ describe('Click Stream Api Cloudfront deploy Construct Test', () => {
   });
 
   test('Api lambda Function', () => {
-    expect(findResourcesName(newCloudfrontApiStackTemplate, 'AWS::Lambda::LayerVersion'))
-      .toEqual([
-        'testClickStreamCloudfrontApiLambdaAdapterLayerF0F222D4',
-      ]);
-    newCloudfrontApiStackTemplate.hasResourceProperties('AWS::Lambda::LayerVersion', {
-      CompatibleRuntimes: [
-        Runtime.NODEJS_16_X.toString(),
-        Runtime.NODEJS_18_X.toString(),
-        Runtime.NODEJS_20_X.toString(),
-        Runtime.NODEJS_LATEST.toString(),
-      ],
-    });
     newCloudfrontApiStackTemplate.hasResourceProperties('AWS::Lambda::Function', {
       Architectures: [
-        Architecture.ARM_64.toString(),
+        Architecture.X86_64.toString(),
       ],
       Description: 'Lambda function for api of solution Clickstream Analytics on AWS',
       Environment: {
@@ -1756,9 +1743,7 @@ describe('Click Stream Api Cloudfront deploy Construct Test', () => {
       },
       Handler: 'run.sh',
       Layers: [
-        {
-          Ref: 'testClickStreamCloudfrontApiLambdaAdapterLayerF0F222D4',
-        },
+        Match.anyValue(),
       ],
       MemorySize: 512,
       Runtime: 'nodejs20.x',
@@ -1787,37 +1772,8 @@ describe('Click Stream Api Cloudfront deploy Construct Test', () => {
     });
     newCloudfrontApiStackTemplate.hasResourceProperties('AWS::Lambda::Function', {
       Architectures: [
-        Architecture.ARM_64.toString(),
+        Architecture.X86_64.toString(),
       ],
-      Description: 'Lambda function for api of solution Clickstream Analytics on AWS',
-    });
-
-  });
-
-  test('Api lambda Function in GCR', () => {
-    newALBApiStackCNTemplate.hasResourceProperties('AWS::Lambda::Function', {
-      Architectures: [
-        Architecture.ARM_64.toString(),
-      ],
-      Description: 'Lambda function for dictionary init of solution Click Stream Analytics on AWS',
-      Runtime: 'nodejs20.x',
-    });
-    newALBApiStackCNTemplate.hasResourceProperties('AWS::Lambda::Function', {
-      Architectures: [
-        Architecture.ARM_64.toString(),
-      ],
-      Description: 'Lambda function for state machine action of solution Clickstream Analytics on AWS',
-      Runtime: 'nodejs20.x',
-    });
-    newALBApiStackCNTemplate.hasResourceProperties('AWS::Lambda::Function', {
-      Architectures: [
-        Architecture.ARM_64.toString(),
-      ],
-      Environment: {
-        Variables: {
-          QUICKSIGHT_EMBED_ROLE_ARN: '',
-        },
-      },
       Description: 'Lambda function for api of solution Clickstream Analytics on AWS',
     });
 

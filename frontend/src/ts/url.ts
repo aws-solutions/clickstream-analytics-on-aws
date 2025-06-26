@@ -27,10 +27,10 @@ export const PIPELINE_SINK_CONNECTOR_GUIDE =
 export const SOLUTION_DOCUMENTS_DOMAIN_EN =
   'https://docs.aws.amazon.com/solutions/latest/clickstream-analytics-on-aws';
 export const SOLUTION_DOCUMENTS_DOMAIN_CN =
-  'https://awslabs.github.io/clickstream-analytics-on-aws/';
+  'https://aws-solutions.github.io/clickstream-analytics-on-aws/';
 
 export const SUBMMIT_ISSUE_LINK =
-  'https://github.com/awslabs/clickstream-analytics-on-aws/issues';
+  'https://github.com/aws-solutions/clickstream-analytics-on-aws/issues';
 
 export const getSolutionVersion = () => {
   const configJSONObj: ConfigType = JSON.parse(

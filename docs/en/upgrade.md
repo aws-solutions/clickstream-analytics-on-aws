@@ -175,7 +175,7 @@ The solution automatically and asynchronously upgrades the views and materialize
 [intranet-template]: https://{{ aws_bucket }}.s3.amazonaws.com/{{ aws_prefix }}/{{ aws_version }}/private-exist-vpc-control-plane-stack.template.json
 [intranet-cn-template]: https://{{ aws_cn_bucket }}.s3.cn-north-1.amazonaws.com.cn/{{ aws_cn_prefix }}/{{ aws_cn_version }}/private-exist-vpc-control-plane-stack.template.json
 [troubleshooting]: ./troubleshooting.md
-[v115]: https://awslabs.github.io/clickstream-analytics-on-aws/en/1.1.5/upgrade/
+[v115]: https://aws-solutions.github.io/clickstream-analytics-on-aws/en/1.1.5/upgrade/
 [exploration]: ./analytics/explore/index.md
 [view-schema-in-redshift]: ./faq.md#i-already-enable-data-modeling-on-redshift-so-why-cant-i-see-the-schema-and-tables-created-by-this-solution-in-the-redshift-query-editor
 [faq-recalculate-data]: ./faq.md#how-do-i-recalculate-historical-events-for-out-of-the-box-dashboards

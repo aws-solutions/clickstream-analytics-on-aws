@@ -360,7 +360,7 @@ For iOS: Refer to [Swift SDK event attributes](./swift.md#event-attributes)
 
 ## Change log
 
-[GitHub change log](https://github.com/awslabs/clickstream-flutter/releases)
+[GitHub change log](https://github.com/aws-solutions/clickstream-analytics-on-aws-flutter-sdk/releases)
 
 Native SDK version dependencies
 
@@ -373,6 +373,6 @@ Native SDK version dependencies
 
 ## Reference link
 
-[Source code](https://github.com/awslabs/clickstream-flutter)
+[Source code](https://github.com/aws-solutions/clickstream-analytics-on-aws-flutter-sdk)
 
-[Project issue](https://github.com/awslabs/clickstream-flutter/issues)
+[Project issue](https://github.com/aws-solutions/clickstream-analytics-on-aws-flutter-sdk/issues)

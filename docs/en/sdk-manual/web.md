@@ -34,7 +34,7 @@ The SDK is based on the amplify-js SDK core library and developed according to t
         Your `appId` and `endpoint` are already set up in it, you can also manually add this code snippet and replace the values of appId and endpoint after you registered app to a data pipeline in the Clickstream web console.
     
     === "Using JS File"
-        1.Download the `clickstream-web.min.js` from the assets in [GitHub Release](https://github.com/awslabs/clickstream-web/releases) page then copy it into your project.
+        1.Download the `clickstream-web.min.js` from the assets in [GitHub Release](https://github.com/aws-solutions/clickstream-analytics-on-aws-web-sdk/releases) page then copy it into your project.
         
         2.Add the following initial code into your `index.html`.
     
@@ -516,7 +516,7 @@ You can use the above preset item attributes, of course, you can also add custom
 
 ## Google Tag Manager integration
 
-1. Download the Clickstream SDK template file (.tpl) from the [SDK Release Page](https://github.com/awslabs/clickstream-web/releases).
+1. Download the Clickstream SDK template file (.tpl) from the [SDK Release Page](https://github.com/aws-solutions/clickstream-analytics-on-aws-web-sdk/releases).
 
 2. Refer to the Google Tag Manager [Import Guide](https://developers.google.com/tag-platform/tag-manager/templates#export_and_import) for instructions on importing the .tpl file as a custom template in your tag manager console.
 
@@ -534,13 +534,13 @@ You can use the above preset item attributes, of course, you can also add custom
 
 ## Change log
 
-[GitHub Change log](https://github.com/awslabs/clickstream-web/releases)
+[GitHub Change log](https://github.com/aws-solutions/clickstream-analytics-on-aws-web-sdk/releases)
 
 ## Sample project
 Sample [Web Project](https://github.com/aws-samples/clickstream-sdk-samples/tree/main/web) for SDK integration.
 
 ## Reference link
 
-[Source code](https://github.com/awslabs/clickstream-web)
+[Source code](https://github.com/aws-solutions/clickstream-analytics-on-aws-web-sdk)
 
-[Project issue](https://github.com/awslabs/clickstream-web/issues)
+[Project issue](https://github.com/aws-solutions/clickstream-analytics-on-aws-web-sdk/issues)

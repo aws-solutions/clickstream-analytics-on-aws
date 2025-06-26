@@ -28,6 +28,7 @@ import {
   Aws,
   Arn,
   ArnFormat,
+  CfnMapping,
 } from 'aws-cdk-lib';
 import {
   EndpointType,
@@ -48,14 +49,14 @@ import {
   IVpc, SubnetType,
 } from 'aws-cdk-lib/aws-ec2';
 import { ArnPrincipal, Effect, PolicyDocument, PolicyStatement, Role, ServicePrincipal } from 'aws-cdk-lib/aws-iam';
-import { Architecture, Code, Function as LambdaFunction, Runtime } from 'aws-cdk-lib/aws-lambda';
+import { Architecture, Code, Function as LambdaFunction, Runtime, LayerVersion } from 'aws-cdk-lib/aws-lambda';
 import { RetentionDays } from 'aws-cdk-lib/aws-logs';
 import { IBucket } from 'aws-cdk-lib/aws-s3';
 import { Construct } from 'constructs';
 import { BatchInsertDDBCustomResource } from './batch-insert-ddb-custom-resource-construct';
 import { BackendEventBus } from './event-bus-construct';
 import { AddAdminUser } from './insert-admin-user';
-import { LambdaAdapterLayer } from './layer/lambda-web-adapter/layer';
+
 import { StackActionStateMachine } from './stack-action-state-machine-construct';
 import { StackWorkflowStateMachine } from './stack-workflow-state-machine-construct';
 import { addCfnNagSuppressRules, addCfnNagToSecurityGroup, rulesToSuppressForLambdaVPCAndReservedConcurrentExecutions } from '../../common/cfn-nag';
@@ -120,6 +121,18 @@ export class ClickStreamApiConstruct extends Construct {
 
   constructor(scope: Construct, id: string, props: ClickStreamApiProps) {
     super(scope, id);
+
+    // Create a mapping for region-specific AWS Lambda Web Adapter layers
+    const webAdapterlayerMap = new CfnMapping(this, 'RegionLayerMap', {
+      mapping: {
+        'cn-north-1': {
+          LayerArn: 'arn:aws-cn:lambda:cn-north-1:041581134020:layer:LambdaAdapterLayerX86:25',
+        },
+        'cn-northwest-1': {
+          LayerArn: 'arn:aws-cn:lambda:cn-northwest-1:069767869989:layer:LambdaAdapterLayerX86:25',
+        }
+      },
+    });
 
     this.prefixTimeGSIName = 'prefix-time-index';
     this.prefixMonthGSIName = 'prefix-month-index';
@@ -244,7 +257,8 @@ export class ClickStreamApiConstruct extends Construct {
     props.stackWorkflowS3Bucket.grantPut(this.uploadRole, `${props.pluginPrefix}*`);
 
     // Create api function
-    this.apiFunction = this.createApiFunction(props, this.lambdaFunctionNetwork, apiFunctionRole);
+    const webAdapterlayer = webAdapterlayerMap.findInMap(Aws.REGION, 'LayerArn', `arn:aws:lambda:${Aws.REGION}:753240598075:layer:LambdaAdapterLayerX86:25`);
+    this.apiFunction = this.createApiFunction(props, this.lambdaFunctionNetwork, apiFunctionRole, webAdapterlayer);
 
     if (props.fronting === 'cloudfront') {
       if (!props.apiGateway) {
@@ -312,7 +326,7 @@ export class ClickStreamApiConstruct extends Construct {
     return quickSightEmbedRole.roleArn;
   }
 
-  private createApiFunction(props: ClickStreamApiProps, lambdaFunctionNetwork: any, role: Role): LambdaFunction {
+  private createApiFunction(props: ClickStreamApiProps, lambdaFunctionNetwork: any, role: Role, webAdapterlayer: string): LambdaFunction {
     const fn = new LambdaFunction(this, 'ApiFunction', {
       description: 'Lambda function for api of solution Clickstream Analytics on AWS',
       code: Code.fromDockerBuild(path.join(__dirname, '../../../'), {
@@ -323,8 +337,17 @@ export class ClickStreamApiConstruct extends Construct {
       }),
       handler: 'run.sh',
       runtime: Runtime.NODEJS_20_X,
-      architecture: Architecture.ARM_64,
-      layers: [new LambdaAdapterLayer(this, 'LambdaAdapterLayer')],
+      // aws-lambda-web-adapter hosts prebuilt lambda layers for different regions.
+      // The conditional shown below selects the layer according to information
+      // described in, https://github.com/awslabs/aws-lambda-web-adapter
+      architecture: Architecture.X86_64,
+      layers: [
+        LayerVersion.fromLayerVersionArn(
+          this,
+          'ExternalLayer',
+          webAdapterlayer,
+        ),
+      ],
       environment: {
         AWS_LAMBDA_EXEC_WRAPPER: '/opt/bootstrap',
         CLICK_STREAM_TABLE_NAME: this.metadataTable.tableName,

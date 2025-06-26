@@ -63,8 +63,8 @@ The data modeling module loads the processed data into lake house. It supports t
 
 The reporting module creates a secure connection to the data warehouse and provisions the out-of-box dashboards in business intelligence Amazon QuickSight.
 
-[clickstream-swift]: https://github.com/awslabs/clickstream-swift
-[clickstream-andriod]: https://github.com/awslabs/clickstream-android
-[clickstream-web]: https://github.com/awslabs/clickstream-web
-[clickstream-flutter]: https://github.com/awslabs/clickstream-flutter
+[clickstream-swift]: https://github.com/aws-solutions/clickstream-analytics-on-aws-swift-sdk
+[clickstream-andriod]: https://github.com/aws-solutions/clickstream-analytics-on-aws-android-sdk
+[clickstream-web]: https://github.com/aws-solutions/clickstream-analytics-on-aws-web-sdk
+[clickstream-flutter]: https://github.com/aws-solutions/clickstream-analytics-on-aws-flutter-sdk
 [clickstream-wechat]: https://github.com/awslabs/clickstream-wechat

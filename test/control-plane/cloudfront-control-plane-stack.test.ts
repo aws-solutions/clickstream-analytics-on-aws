@@ -33,7 +33,7 @@ describe('CloudFrontS3PortalStack - Default stack props for common features', ()
   test('Global region', () => {
     commonTemplate.resourceCountIs('AWS::CloudFront::CloudFrontOriginAccessIdentity', 1);
     commonTemplate.resourceCountIs('AWS::CloudFront::Distribution', 1);
-    commonTemplate.resourceCountIs('AWS::Lambda::LayerVersion', 3);
+    commonTemplate.resourceCountIs('AWS::Lambda::LayerVersion', 2);
     commonTemplate.resourceCountIs('Custom::CDKBucketDeployment', 2);
 
     commonTemplate.hasOutput(OUTPUT_CONTROL_PLANE_URL, {});
@@ -416,7 +416,7 @@ describe('CloudFrontS3PortalStack - Default stack props for common features', ()
     commonTemplate.resourceCountIs('AWS::S3::Bucket', 2);
     commonTemplate.resourceCountIs('AWS::CloudFront::CloudFrontOriginAccessIdentity', 1);
     commonTemplate.resourceCountIs('AWS::CloudFront::Distribution', 1);
-    commonTemplate.resourceCountIs('AWS::Lambda::LayerVersion', 3);
+    commonTemplate.resourceCountIs('AWS::Lambda::LayerVersion', 2);
     commonTemplate.resourceCountIs('Custom::CDKBucketDeployment', 2);
     expect(findResourcesName(commonTemplate, 'AWS::Lambda::Function').sort())
       .toEqual([
@@ -791,7 +791,7 @@ describe('CloudFrontS3PortalStack - custom domain', () => {
     template.resourceCountIs('AWS::CloudFront::CloudFrontOriginAccessIdentity', 1);
     template.resourceCountIs('AWS::CloudFront::Distribution', 1);
     template.resourceCountIs('AWS::Route53::RecordSet', 1);
-    template.resourceCountIs('AWS::Lambda::LayerVersion', 3);
+    template.resourceCountIs('AWS::Lambda::LayerVersion', 2);
     template.resourceCountIs('Custom::CDKBucketDeployment', 2);
 
     template.hasOutput(OUTPUT_CONTROL_PLANE_URL, {});
@@ -868,7 +868,7 @@ describe('CloudFrontS3PortalStack - China region', () => {
     template.resourceCountIs('AWS::CloudFront::CloudFrontOriginAccessIdentity', 1);
     template.resourceCountIs('AWS::CloudFront::Distribution', 1);
     template.resourceCountIs('AWS::Route53::RecordSet', 0);
-    template.resourceCountIs('AWS::Lambda::LayerVersion', 3);
+    template.resourceCountIs('AWS::Lambda::LayerVersion', 2);
     template.resourceCountIs('Custom::CDKBucketDeployment', 2);
 
     // Check Origin Request Policy

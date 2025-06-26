@@ -34,7 +34,7 @@ Clickstream Web SDK 可以帮助您轻松将Web网站里的点击流数据发送
         您的 `appId` 和 `endpoint` 已经设置好了, 在 Clickstream Analytics 解决方案控制台中将应用程序注册到数据管道后，您还可以手动添加此代码段并替换 appId 和 endpoint 的值。
     
     === "使用 JS 文件"
-        1.在 [GitHub](https://github.com/awslabs/clickstream-web/releases) 版本发布页面的附件中下载 `clickstream-web.min.js`文件，然后拷贝到您的项目中。
+        1.在 [GitHub](https://github.com/aws-solutions/clickstream-analytics-on-aws-web-sdk/releases) 版本发布页面的附件中下载 `clickstream-web.min.js`文件，然后拷贝到您的项目中。
         
         2.将以下初始代码添加到`index.html`中。
     
@@ -517,7 +517,7 @@ Clickstream Web SDK 支持以下数据类型：
 
 ## 在 Google Tag Manager 中集成
 
-1. 从 SDK [发布页面]((https://github.com/awslabs/clickstream-web/releases))下载 Clickstream SDK Google Tag Manager 模板文件（.tpl）。
+1. 从 SDK [发布页面]((https://github.com/aws-solutions/clickstream-analytics-on-aws-web-sdk/releases))下载 Clickstream SDK Google Tag Manager 模板文件（.tpl）。
 
 2. 请参考 Google Tag Manager [导入指南](https://developers.google.com/tag-platform/tag-manager/templates#export_and_import)，按照说明在您的标签管理器控制台将 .tpl 文件作为自定义模板导入。
 
@@ -535,13 +535,13 @@ Clickstream Web SDK 支持以下数据类型：
 
 ## SDK更新日志
 
-参考：[GitHub 更新日志](https://github.com/awslabs/clickstream-web/releases)
+参考：[GitHub 更新日志](https://github.com/aws-solutions/clickstream-analytics-on-aws-web-sdk/releases)
 
 ## 示例项目
 集成 SDK 的示例 [Web 项目](https://github.com/aws-samples/clickstream-sdk-samples/tree/main/web)
 
 ## 参考链接
 
-[SDK 源码](https://github.com/awslabs/clickstream-web)
+[SDK 源码](https://github.com/aws-solutions/clickstream-analytics-on-aws-web-sdk)
 
-[SDK 问题](https://github.com/awslabs/clickstream-web/issues)
+[SDK 问题](https://github.com/aws-solutions/clickstream-analytics-on-aws-web-sdk/issues)
